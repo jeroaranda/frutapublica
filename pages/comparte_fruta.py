@@ -9,7 +9,7 @@ st.title(f'Comparte fruta')
 
 # Layout for the form
 
-"### Formulario para capturar flora aprovechable"
+"### Formulario para capturar flora"
 id = uuid.uuid4()
 st.warning(str(id))
 timeout = now + timedelta(hours = -6)
