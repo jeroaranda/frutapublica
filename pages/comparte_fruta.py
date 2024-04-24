@@ -16,13 +16,13 @@ options = ['limón','mango','mandarina','gasparito'] + ["Otra opción..."]
 producto = st.selectbox("Flora:", options=options)
 
 if producto == "Otra opción...":
-    otroproducto = st.text_input("Añade tu opción...",key='otroproducto')
+    otroproducto = st.text_input("Añade tu opción de flora...",key='otroproducto')
 
-options = ['jero','nacho'] + ["Otra opción..."]
+options = ['jero','nacho'] + ["Otro usuario.."]
 usuario = st.selectbox("Usuario", options=options)
 
 if usuario == "Otra opción...":
-    otrousuario = st.text_input("Añade tu opción...",key = 'otrousuario')
+    otrousuario = st.text_input("Añade tu usuario...",key = 'otrousuario')
 
 location = streamlit_geolocation()
 if location['latitude'] != None:
