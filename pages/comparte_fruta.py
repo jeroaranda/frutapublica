@@ -34,7 +34,7 @@ img_file_buffer = st.camera_input("Toma una foto")
 
 if img_file_buffer is not None:
     # To read image file buffer as bytes:
-    with open (f'/data/imagenes/{str(id)}.jpg','wb') as file:
+    with open (f'{str(id)}.jpg','wb') as file:
           file.write(img_file_buffer.getbuffer())
     bytes_data = img_file_buffer.getvalue()
     
