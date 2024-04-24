@@ -1,0 +1,9 @@
+scikit-learn
+numpy
+streamlit
+matplotlib
+pandas
+imageio
+openpyxl
+plotly
+streamlit-geolocation
