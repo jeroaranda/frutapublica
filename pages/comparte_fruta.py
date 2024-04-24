@@ -13,7 +13,8 @@ with st.form("myform"):
     placeholder_for_optional_text = st.empty()
 
     location = streamlit_geolocation()
-    st.write(f'Your location is (lat:{location.latitude},lon:{location.longitude})')
+    if latitude in location:
+        st.write(f'Your location is (lat:{location.latitude},lon:{location.longitude})')
     img_file_buffer = st.camera_input("Toma una foto")
 
     if img_file_buffer is not None:
