@@ -1,7 +1,10 @@
 import streamlit as st
 from streamlit_geolocation import streamlit_geolocation
+from datetime import datetime
 
-st.title('Comparte fruta')
+now = datetime.now()
+
+st.title(f'Comparte fruta {now}')
 
 # Layout for the form
 
@@ -11,13 +14,13 @@ options = ['limón','mango','mandarina','gasparito'] + ["Otra opción..."]
 producto = st.selectbox("Selecciona una opción", options=options)
 
 if producto == "Otra opción...":
-    otroproducto = st.text_input("Añade tu opción...")
+    otroproducto = st.text_input("Añade tu opción...",key='otroproducto')
 
 options = ['jero','nacho'] + ["Otra opción..."]
 usuario = st.selectbox("Selecciona una opción", options=options)
 
 if usuario == "Otra opción...":
-    otrousuario = st.text_input("Añade tu opción...")
+    otrousuario = st.text_input("Añade tu opción...",key = 'otrousuario')
 
 location = streamlit_geolocation()
 if location['latitude'] != None:
