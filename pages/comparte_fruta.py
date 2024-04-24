@@ -11,7 +11,7 @@ st.title(f'Comparte fruta')
 
 "### Formulario para capturar flora"
 id = uuid.uuid4()
-st.warning(str(id))
+st.warning(f'Id: {str(id)}')
 timeout = now + timedelta(hours = -6)
 st.warning(f'Fecha  y hora: {timeout}')
 
