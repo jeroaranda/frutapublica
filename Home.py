@@ -125,7 +125,7 @@ def main():
     key='download-csv'
     )
     images = [file for file in os.listdir() if file.endswith('.jpg')]
-    img = st.selectbox('Selected img', images,0)
+    img = st.selectbox('Selecciona la imagen de flora:', images,0)
     with open(img, "rb") as file:
         st.image(img, caption='Fruta seleccionada')
         btn = st.download_button(
