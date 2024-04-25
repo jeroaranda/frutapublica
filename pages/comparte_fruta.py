@@ -17,9 +17,8 @@ timeout = now + timedelta(hours = -6)
 st.warning(f'Fecha  y hora: {timeout}')
 
 options = ['limón','mango','mandarina','gasparito'] + ["Otra opción..."]
-producto = st.selectbox("Flora:", options=options)
-
-if producto == "Otra opción...":
+flora = st.selectbox("Flora:", options=options)
+if flora == "Otra opción...":
     otroproducto = st.text_input("Añade tu opción de flora...",key='otroproducto')
     flora = otroproducto
 
