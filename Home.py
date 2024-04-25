@@ -104,7 +104,7 @@ def main():
     # "order = group_df.groupby(['carrier'])['tracking_number'].sum().sort_values().index.to_list()
 
     # Create the chart
-    fig = px.bar(data_grouped, x='flora inferida', y='id', color='usuario', title='Número de envíos por carrier y app', barmode='stack', )#category_orders={'carrier': order[::-1]})
+    fig = px.bar(data_grouped, x='flora inferida', y='id', color='usuario', title='Diversidad florar por usuario', barmode='stack', )#category_orders={'carrier': order[::-1]})
 
     # Set the axis labels
     fig.update_xaxes(title='Frutas')
