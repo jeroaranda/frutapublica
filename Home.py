@@ -124,27 +124,15 @@ def main():
     "text/csv",
     key='download-csv'
     )
-
-    from zipfile import ZipFile
-    from io import BytesIO
-
-    zipObj = ZipFile("sample.zip", "w")
-    # Add multiple files to the zip
-    fotos = [file for file in os.listdir() if file.endswith('.jpg')]
-    for foto in fotos:
-        zipObj.write(foto)
-    # close the Zip File
-    zipObj.close()
-
-    ZipfileDotZip = "sample.zip"
-
-    with open(ZipfileDotZip, "rb") as f:
-        bytes = f.read()
-        b64 = base64.b64encode(bytes).decode()
-        href = f"<a href=\"data:file/zip;base64,{b64}\" download='{ZipfileDotZip}.zip'>\
-            Click last model weights\
-        </a>"
-    st.markdown(href, unsafe_allow_html=True)
+    images = [file for file in os.listdir() if file.endswith('.jpg')]
+    img = st.sidebar.multiselect('Selected img', images,images[0])
+    with open(img, "rb") as file:
+        btn = st.download_button(
+                label="Download image",
+                data=file,
+                file_name=img,
+                mime="image/jpg"
+            )
 
 
 
