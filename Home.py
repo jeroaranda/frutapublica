@@ -17,7 +17,7 @@ def get_fruit():
   #df2 = pd.read_csv(url)
   return df
 
-
+@st.cache_data
 def get_or_create_flora_data():
     """
     Checks if a CSV file named "flora.csv" exists.
