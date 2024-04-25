@@ -8,6 +8,8 @@ now = datetime.now()
 
 st.title(f'Comparte fruta')
 
+def get_flora_data():
+    return pd.read_csv('flora.csv')
 # Layout for the form
 
 "### Formulario para capturar flora"
@@ -15,14 +17,14 @@ id = uuid.uuid4()
 st.warning(f'Id: {str(id)}')
 timeout = now + timedelta(hours = -6)
 st.warning(f'Fecha  y hora: {timeout}')
-
-options = ['limón','mango','mandarina','gasparito'] + ["Otra opción..."]
+df = get_flora_data()
+options = df['flora inferida'].unique() + ["Otra opción..."]
 flora = st.selectbox("Flora:", options=options)
 if flora == "Otra opción...":
     otroproducto = st.text_input("Añade tu opción de flora...",key='otroproducto')
     flora = otroproducto
 
-options = ['jero','nacho'] + ["Otro usuario..."]
+options = df.usuario.unique() + ["Otro usuario..."]
 usuario = st.selectbox("Usuario", options=options)
 
 if usuario == "Otro usuario...":
@@ -45,7 +47,7 @@ img_file_buffer = st.camera_input("Toma una foto")
 
 if img_file_buffer is not None:
     # To read image file buffer as bytes:
-    
+
     with open (f'{str(id)}.jpg','wb') as file:
           file.write(img_file_buffer.getbuffer())
     bytes_data = img_file_buffer.getvalue()
