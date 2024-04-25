@@ -60,7 +60,7 @@ if st.button("Capturar flora", type="primary"):
     df = pd.DataFrame(row)
     st.warning(f'Capturando{row}')
     df.to_csv('flora.csv',mode='a',index=False,header=False)
-    st.experimental_rerun()
+    st.rerun()
 
 
 

@@ -16,7 +16,9 @@ def get_fruit():
   df = pd.read_csv('data/temp.csv')
   #df2 = pd.read_csv(url)
   return df
-
+@st.cache_data
+def convert_df(df):
+   return df.to_csv(index=False).encode('utf-8')
 @st.cache_data
 def get_or_create_flora_data():
     """
@@ -81,15 +83,15 @@ def main():
     st.set_page_config(layout="wide")
     st.title("La Fruta Pública")
     df = get_or_create_flora_data()
-    df = df.reset_index()
+
     #plot fruits by people
     #df.groupby('inferred_fruit')['index'].count().plot()
-    st.dataframe(df)
+
     df = df.fillna('Desconocido')
     col1, col2, col3 = st.columns(3)
-    col1.metric("Frutas registradas:", df.shape[0])
-    st.dataframe(df.groupby(['flora inferida','usuario'])['id'].count())
-    
+    col1.metric("Flora totales:", df.shape[0])
+    col2.metric("Diversidad floral:", df['flora inferida'].nunique())
+    col3.metric("Usuarios registradas:", df.usuario.nunique())
     # Create the bar plot using Plotly
     data_grouped = df.groupby(['flora inferida', 'usuario'])['id'].count().reset_index()
     
@@ -109,15 +111,20 @@ def main():
 
     # Display the chart
     st.plotly_chart(fig, use_container_width=True)
+    "### Descarga"
+    "Ejemplo de data:"
+    st.dataframe(df.head())
+
+    csv = convert_df(df)
+    st.download_button(
+    "Descargar",
+    csv,
+    "flora.csv",
+    "text/csv",
+    key='download-csv'
+    )
 
 
-
-    # Use the loaded or created flora_data and the figure (`fig`) in your Streamlit app logic
-
-    st.plotly_chart(fig)  # Display the Plotly bar chart
-
-
-        
 
 if __name__ == '__main__':
     main()
