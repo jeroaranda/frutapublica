@@ -5,7 +5,7 @@ from sklearn.decomposition import PCA
 import imageio
 import requests
 import time
-import plotly.graph_objects as go
+import plotly.express as px
 import pandas as pd
 
 
@@ -92,8 +92,25 @@ def main():
     
     # Create the bar plot using Plotly
     data_grouped = df.groupby(['flora inferida', 'usuario'])['id'].count().reset_index()
-    fig = go.Figure(data=[go.Bar(x=data_grouped['flora inferida'], y=data_grouped['id'], color=data_grouped['usuario'])])
-    fig.update_layout(title='Flora Inferences by User', xaxis_title='Flora Inferred', yaxis_title='Count')
+    
+    #fig.update_layout(title='Flora Inferences by User', xaxis_title='Flora Inferred', yaxis_title='Count')
+
+
+
+    # Sort the carriers by the total number of tracking numbers
+    # "order = group_df.groupby(['carrier'])['tracking_number'].sum().sort_values().index.to_list()
+
+    # Create the chart
+    fig = px.bar(data_grouped, x='flora inferida', y='id', color='usuario', title='Número de envíos por carrier y app', barmode='stack', )#category_orders={'carrier': order[::-1]})
+
+    # Set the axis labels
+    fig.update_xaxes(title='Frutas')
+    fig.update_yaxes(title='Mapeadas')
+
+    # Display the chart
+    st.plotly_chart(fig, use_container_width=True)
+
+
 
     # Use the loaded or created flora_data and the figure (`fig`) in your Streamlit app logic
 
