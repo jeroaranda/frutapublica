@@ -52,6 +52,7 @@ observaciones = st.text_input('Observaciones')
 
 
 if st.button("Capturar flora", type="primary"):
+    id = uuid.uuid1()
     row = {"id":[id], "datetime":[timeout], "flora inferida":[flora], "usuario":[usuario],'lat':[lat],'lon':[lon],'dirección':[location],'observaciones':[observaciones]}
     df = pd.DataFrame(row)
     st.warning(f'Capturando{row}')
