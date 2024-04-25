@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit_geolocation import streamlit_geolocation
 from datetime import datetime, timedelta
 import uuid
+import pandas as pd
 
 now = datetime.now()
 
@@ -20,18 +21,26 @@ producto = st.selectbox("Flora:", options=options)
 
 if producto == "Otra opción...":
     otroproducto = st.text_input("Añade tu opción de flora...",key='otroproducto')
+    flora = otroproducto
 
 options = ['jero','nacho'] + ["Otro usuario..."]
 usuario = st.selectbox("Usuario", options=options)
 
 if usuario == "Otro usuario...":
     otrousuario = st.text_input("Añade tu usuario...",key = 'otrousuario')
+    usuario = otrousuario
 
 location = streamlit_geolocation()
 if location['latitude'] != None:
     st.write(f'Tu ubicación es: (lat:{location["latitude"]},lon:{location["longitude"]})')
+    lat = location["latitude"]
+    lon = location["longitude"]
 else:
     otralocation = st.text_input("Añade la ubicación(latitud y longitud separadas por una coma)",key = 'otralocation')
+    location = otralocation
+    lat = None
+    lon = None
+
 
 img_file_buffer = st.camera_input("Toma una foto")
 
@@ -41,11 +50,19 @@ if img_file_buffer is not None:
           file.write(img_file_buffer.getbuffer())
     bytes_data = img_file_buffer.getvalue()
     
-    
+
+
 #fecha
 observaciones = st.text_input('Observaciones')
 
+
 if st.button("Capturar flora", type="primary"):
+    row = {"id":[id], "datetime":[timeout], "flora inferida":[flora], "usuario":[usuario],'lat':[lat],'lon':[lon],'dirección':[location],'observaciones':[observaciones]}
+    df = pd.DataFrame(row)
+    df.to_csv('floca.csv',append=True,index=False)
+
+
+
     st.write('Capturando')
 
 
