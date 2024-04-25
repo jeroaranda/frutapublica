@@ -124,17 +124,6 @@ def main():
     "text/csv",
     key='download-csv'
     )
-    images = [file for file in os.listdir() if file.endswith('.jpg')]
-    img = st.selectbox('Selecciona la imagen de flora:', images,0)
-    with open(img, "rb") as file:
-        st.image(img, caption='Fruta seleccionada')
-        btn = st.download_button(
-                label="Descarga imagenes",
-                data=file,
-                file_name=img,
-                mime="image/jpg"
-            )
-
 
 
 if __name__ == '__main__':
