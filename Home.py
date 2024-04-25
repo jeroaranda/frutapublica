@@ -66,7 +66,7 @@ def create_and_save_flora_data(file_path):
     df = df.reset_index()
     df['lat'] = df.location.apply(lambda x: float(x.split(',')[0]))
     df['lon'] = df.location.apply(lambda x: float(x.split(',')[1]))
-    df.rename(columns={'index':'id','date':'datetime','user':'usuario','text':'observaciones','dirección':'location','inferred_fruit':'flora inferida'},inplace=True)
+    df.rename(columns={'index':'id','date':'datetime','user':'usuario','text':'observaciones','location':'dirección','inferred_fruit':'flora inferida'},inplace=True)
 
     # Create a new empty DataFrame
     data = pd.DataFrame(columns=columns)
