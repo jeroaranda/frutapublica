@@ -17,7 +17,7 @@ def get_flora_data():
 timeout = now + timedelta(hours = -6)
 st.warning(f'Fecha  y hora: {timeout}')
 df = get_flora_data()
-options = df['flora inferida'].unique() + ["Otra opción..."]
+options = list(df['flora inferida'].unique()) + ["Otra opción..."]
 flora = st.selectbox("Flora:", options=options)
 if flora == "Otra opción...":
     otroproducto = st.text_input("Añade tu opción de flora...",key='otroproducto')
