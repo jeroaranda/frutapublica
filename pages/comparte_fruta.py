@@ -29,7 +29,7 @@ if usuario == "Otro usuario...":
 
 location = streamlit_geolocation()
 if location['latitude'] != None:
-    st.write(f'Your location is (lat:{location["latitude"]},lon:{location["longitude"]})')
+    st.write(f'Tu ubicación es: (lat:{location["latitude"]},lon:{location["longitude"]})')
 else:
     otralocation = st.text_input("Añade la ubicación",key = 'otralocation')
 
