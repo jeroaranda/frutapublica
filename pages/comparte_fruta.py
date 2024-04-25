@@ -57,13 +57,14 @@ if st.button("Capturar flora", type="primary"):
     row = {"id":[id], "datetime":[timeout], "flora inferida":[flora], "usuario":[usuario],'lat':[lat],'lon':[lon],'dirección':[location],'observaciones':[observaciones]}
     df = pd.DataFrame(row)
     st.warning(f'Capturando{row}')
+    df.to_csv('flora.csv',mode='a',index=False,header=False)
     if img_file_buffer is not None:
         # To read image file buffer as bytes:
         with open (f'{str(id)}.jpg','wb') as file:
             file.write(img_file_buffer.getbuffer())
         bytes_data = img_file_buffer.getvalue()
         
-    df.to_csv('flora.csv',mode='a',index=False,header=False)
+    
     st.rerun()
     st.caching.clear_caching()
 
