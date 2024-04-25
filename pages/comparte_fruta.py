@@ -24,7 +24,7 @@ if flora == "Otra opción...":
     otroproducto = st.text_input("Añade tu opción de flora...",key='otroproducto')
     flora = otroproducto
 
-options = df.usuario.unique() + ["Otro usuario..."]
+options = list(df.usuario.unique()) + ["Otro usuario..."]
 usuario = st.selectbox("Usuario", options=options)
 
 if usuario == "Otro usuario...":
