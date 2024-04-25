@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit_geolocation import streamlit_geolocation
+
 from datetime import datetime, timedelta
 import uuid
 import pandas as pd
@@ -64,6 +65,7 @@ if st.button("Capturar flora", type="primary"):
         
     df.to_csv('flora.csv',mode='a',index=False,header=False)
     st.rerun()
+    st.caching.clear_caching()
 
 
 
