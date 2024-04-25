@@ -13,8 +13,7 @@ def get_flora_data():
 # Layout for the form
 
 "### Formulario para capturar flora"
-id = uuid.uuid4()
-st.warning(f'Id: {str(id)}')
+
 timeout = now + timedelta(hours = -6)
 st.warning(f'Fecha  y hora: {timeout}')
 df = get_flora_data()
@@ -45,13 +44,7 @@ else:
 
 img_file_buffer = st.camera_input("Toma una foto")
 
-if img_file_buffer is not None:
-    # To read image file buffer as bytes:
 
-    with open (f'{str(id)}.jpg','wb') as file:
-          file.write(img_file_buffer.getbuffer())
-    bytes_data = img_file_buffer.getvalue()
-    
 
 
 #fecha
@@ -62,6 +55,12 @@ if st.button("Capturar flora", type="primary"):
     row = {"id":[id], "datetime":[timeout], "flora inferida":[flora], "usuario":[usuario],'lat':[lat],'lon':[lon],'dirección':[location],'observaciones':[observaciones]}
     df = pd.DataFrame(row)
     st.warning(f'Capturando{row}')
+    if img_file_buffer is not None:
+        # To read image file buffer as bytes:
+        with open (f'{str(id)}.jpg','wb') as file:
+            file.write(img_file_buffer.getbuffer())
+        bytes_data = img_file_buffer.getvalue()
+        
     df.to_csv('flora.csv',mode='a',index=False,header=False)
     st.rerun()
 
