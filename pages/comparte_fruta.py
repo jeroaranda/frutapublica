@@ -58,11 +58,12 @@ observaciones = st.text_input('Observaciones')
 if st.button("Capturar flora", type="primary"):
     row = {"id":[id], "datetime":[timeout], "flora inferida":[flora], "usuario":[usuario],'lat':[lat],'lon':[lon],'dirección':[location],'observaciones':[observaciones]}
     df = pd.DataFrame(row)
-    df.to_csv('floca.csv',append=True,index=False)
+    st.write(f'Capturando{row}')
+    df.to_csv('flora.csv',mode='a',index=False)
 
 
 
-    st.write('Capturando')
+
 
 
     
