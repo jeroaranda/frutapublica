@@ -7,6 +7,7 @@ import requests
 import time
 import plotly.express as px
 import pandas as pd
+import os
 
 
 @st.cache_data
@@ -15,8 +16,7 @@ def get_fruit():
   df = pd.read_csv('data/temp.csv')
   #df2 = pd.read_csv(url)
   return df
-import pandas as pd
-import os
+
 
 def get_or_create_flora_data():
     """

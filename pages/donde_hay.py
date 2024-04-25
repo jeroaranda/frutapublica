@@ -2,11 +2,11 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
-from Home import get_or_create_flora_data
+from Home import get_fruit
 
 st.title('La fruta esta aquí:')
 
-df = get_or_create_flora_data()
+df = get_fruit()
 st.dataframe(df[['lat','lon','flora inferida']])
 
 #px.set_mapbox_access_token(open(".mapbox_token").read())
