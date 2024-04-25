@@ -88,11 +88,11 @@ def main():
     df = df.fillna('Desconocido')
     col1, col2, col3 = st.columns(3)
     col1.metric("Frutas registradas:", df.shape[0])
-    st.dataframe(df.groupby(['flora inferida','user'])['index'].count())
+    st.dataframe(df.groupby(['flora inferida','usuario'])['id'].count())
     
     # Create the bar plot using Plotly
-    data_grouped = df.groupby(['flora inferida', 'user'])['index'].count().reset_index()
-    fig = go.Figure(data=[go.Bar(x=data_grouped['flora inferida'], y=data_grouped['index'], color=data_grouped['user'])])
+    data_grouped = df.groupby(['flora inferida', 'usuario'])['id'].count().reset_index()
+    fig = go.Figure(data=[go.Bar(x=data_grouped['flora inferida'], y=data_grouped['id'], color=data_grouped['usuario'])])
     fig.update_layout(title='Flora Inferences by User', xaxis_title='Flora Inferred', yaxis_title='Count')
 
     # Use the loaded or created flora_data and the figure (`fig`) in your Streamlit app logic
