@@ -7,3 +7,4 @@ imageio
 openpyxl
 plotly
 streamlit-geolocation
+ZipFile
