@@ -9,7 +9,6 @@ def get_flora_data():
     return pd.read_csv('flora.csv')
 
 df = get_flora_data()
-st.dataframe(df[['lat','lon','flora inferida']])
 
 #px.set_mapbox_access_token(open(".mapbox_token").read())
 df['size'] = .7
