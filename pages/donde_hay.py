@@ -13,6 +13,6 @@ st.dataframe(df[['lat','lon','inferred_fruit']])
 
 #px.set_mapbox_access_token(open(".mapbox_token").read())
 df['size'] = .7
-fig = px.scatter_mapbox(df, lat="lat", lon="lon",  size='size',   color="inferred_fruit",mapbox_style="carto-positron",zoom=10)
+fig = px.scatter_mapbox(df, lat="lat", lon="lon",  size='size',   color="inferred_fruit",mapbox_style="carto-positron",zoom=.7)
 
 st.plotly_chart(fig)
