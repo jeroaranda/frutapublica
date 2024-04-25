@@ -31,7 +31,7 @@ location = streamlit_geolocation()
 if location['latitude'] != None:
     st.write(f'Tu ubicación es: (lat:{location["latitude"]},lon:{location["longitude"]})')
 else:
-    otralocation = st.text_input("Añade la ubicación",key = 'otralocation')
+    otralocation = st.text_input("Añade la ubicación(latitud y longitud separadas por una coma)",key = 'otralocation')
 
 img_file_buffer = st.camera_input("Toma una foto")
 
