@@ -33,7 +33,7 @@ def show_map_view():
     
     
     # Create map
-    df['size'] = 0.5
+    df['size'] = .2
     fig = px.scatter_mapbox(
         df,
         lat="lat",
@@ -41,7 +41,7 @@ def show_map_view():
         size='size',
         color="flora_name",
         mapbox_style="carto-positron",
-        zoom=0.7,
+        zoom=2.8,
         hover_data=["id", "flora_name", "username", "description"]
     )
     fig.update_traces(cluster=dict(enabled=True))
