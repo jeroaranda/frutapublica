@@ -1,7 +1,7 @@
 import streamlit as st
 from streamlit_geolocation import streamlit_geolocation
 import plotly.express as px
-from database_utils import (
+from database.database_utils import (
     get_observations_df, 
     add_observation, 
     get_recipes, 
@@ -15,27 +15,22 @@ def main():
     st.title("La Fruta Pública")
     
     # Navigation
-    page = st.sidebar.radio("Navigate", ["Map View", "Share Flora", "Recipes", "Analytics"])
+    page = st.sidebar.radio("Páginas", ["Mapa", "Comparte flora", "Recetas", "Analytics"])
     
-    if page == "Map View":
+    if page == "Mapa":
         show_map_view()
-    elif page == "Share Flora":
+    elif page == "Comparte flora":
         share_flora()
-    elif page == "Recipes":
+    elif page == "Recetas":
         show_recipes()
     elif page == "Analytics":
         show_analytics()
 
 def show_map_view():
-    st.header("Flora Map")
+    st.header("Mapa de Flora")
     
     df = get_observations_df()
     
-    # Display metrics
-    col1, col2, col3 = st.columns(3)
-    col1.metric("Total Observations:", len(df))
-    col2.metric("Unique Flora:", df['flora_name'].nunique())
-    col3.metric("Active Users:", df['username'].nunique())
     
     # Create map
     df['size'] = 0.5
@@ -53,7 +48,7 @@ def show_map_view():
     st.plotly_chart(fig, use_container_width=True)
 
 def share_flora():
-    st.header("Share Flora")
+    st.header("Comparte flora")
     
     session = get_db_session()
     flora_options = [f.name for f in session.query(Flora).all()] + ["Other..."]
@@ -62,11 +57,11 @@ def share_flora():
     
     # Form inputs
     flora = st.selectbox("Flora:", options=flora_options)
-    if flora == "Other...":
+    if flora == "Otro...":
         flora = st.text_input("Add new flora name:")
     
-    username = st.selectbox("Username:", options=user_options)
-    if username == "Other...":
+    username = st.selectbox("Usuario:", options=user_options)
+    if username == "Otro...":
         username = st.text_input("Add new username:")
     
     # Get location
@@ -74,85 +69,108 @@ def share_flora():
     if location['latitude'] is not None:
         lat = location["latitude"]
         lon = location["longitude"]
-        st.write(f"Your location: ({lat}, {lon})")
+        st.write(f"Tu ubicación: ({lat}, {lon})")
     else:
-        location_input = st.text_input("Add location (latitude,longitude):")
+        location_input = st.text_input("Añade tu ubicación (latitud,longitud) o dirección:")
         try:
             lat, lon = map(float, location_input.split(','))
         except:
             lat = lon = None
     
-    address = st.text_input("Address (optional):")
-    description = st.text_area("Observations:")
+    address = st.text_input("Dirección (opcional):")
+    description = st.text_area("Observaciones:")
     
     if st.button("Submit", type="primary"):
         if all([flora, username, lat, lon]):
             add_observation(flora, username, lat, lon, address, description)
-            st.success("Observation recorded successfully!")
+            st.success("Observación grabada correctamente!")
             st.rerun()
         else:
-            st.error("Please fill in all required fields.")
+            st.error("Por favor, rellena todos los campos requeridos.")
 
 def show_recipes():
-    st.header("Flora Recipes")
+    st.header("Recetas públicas")
     
     # Tab selection
-    tab1, tab2 = st.tabs(["Browse Recipes", "Add Recipe"])
+    tab1, tab2 = st.tabs(["Explora recetas", "Añade receta"])
     
     with tab1:
         recipes = get_recipes()
         for recipe in recipes:
             with st.expander(recipe['name']):
-                st.write("**Ingredients:**")
+                st.write("**Ingredientes:**")
                 for ingredient in recipe['ingredients']:
                     st.write(f"- {ingredient}")
-                st.write("\n**Preparation:**")
+                st.write("\n**Preparación:**")
                 st.write(recipe['prep'])
     
     with tab2:
-        st.subheader("Add New Recipe")
+        st.subheader("Añade nueva receta")
         
-        name = st.text_input("Recipe Name:")
+        name = st.text_input("Receta:")
         
         session = get_db_session()
         available_flora = [f.name for f in session.query(Flora).all()]
         session.close()
         
-        ingredients = st.multiselect("Ingredients:", available_flora)
-        prep = st.text_area("Preparation Instructions:")
+        ingredients = st.multiselect("Ingredientes:", available_flora)
+        prep = st.text_area("Preparación:")
         
-        if st.button("Add Recipe"):
+        if st.button("Añadir receta"):
             if name and ingredients and prep:
                 add_recipe(name, prep, ingredients)
-                st.success("Recipe added successfully!")
+                st.success("Receta añadida correctamente!")
                 st.rerun()
             else:
-                st.error("Please fill in all fields.")
+                st.error("Porfavor, rellena todos los campos.")
 
 def show_analytics():
     st.header("Analytics")
     
     df = get_observations_df()
-    
-    # Flora distribution
-    fig1 = px.bar(
-        df['flora_name'].value_counts().reset_index(),
-        x='index',
-        y='flora_name',
-        title='Flora Distribution',
-        labels={'index': 'Flora Type', 'flora_name': 'Count'}
-    )
-    st.plotly_chart(fig1, use_container_width=True)
-    
-    # User activity
-    fig2 = px.bar(
-        df['username'].value_counts().reset_index(),
-        x='index',
-        y='username',
-        title='User Activity',
-        labels={'index': 'User', 'username': 'Observations'}
-    )
-    st.plotly_chart(fig2, use_container_width=True)
+    c1, c2 = st.columns(2)
+    with c1:
+        st.metric("Flora totales:", df.flora_name.nunique())
+        st.metric("Observaciones:", df.shape[0])
+    with c2:
+        st.metric("Observaciones por usuario:", df.shape[0]/df.username.nunique())
+        st.metric("Usuarios registrados:", df.username.nunique())
+        
+    data_grouped = df.groupby(['flora_name', 'username'])['id'].count().reset_index()
+
+     # Create the chart
+    fig = px.bar(data_grouped, x='flora_name', y='id', color='username', title='Diversidad florar por usuario', barmode='stack', )#category_orders={'carrier': order[::-1]})
+
+    # Set the axis labels
+    fig.update_xaxes(title='Frutas')
+    fig.update_yaxes(title='Mapeadas')
+
+    # Display the chart
+    st.plotly_chart(fig, use_container_width=True)
+
+    c1, c2 = st.columns(2)
+    with c1:
+        
+        # Flora distribution
+        fig1 = px.bar(
+            df['flora_name'].value_counts().reset_index(),
+            x='flora_name',
+            y='count',
+            title='Flora Distribution',
+            labels={'index': 'Flora Type', 'flora_name': 'Count'}
+        )
+        st.plotly_chart(fig1, use_container_width=True)
+    with c2:
+        
+        # User activity
+        fig2 = px.bar(
+            df['username'].value_counts().reset_index(),
+            x='username',
+            y='count',
+            title='User Activity',
+            labels={'index': 'User', 'username': 'Observations'}
+        )
+        st.plotly_chart(fig2, use_container_width=True)
 
 if __name__ == '__main__':
     main()
