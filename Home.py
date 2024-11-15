@@ -51,18 +51,18 @@ def share_flora():
     st.header("Comparte flora")
     
     session = get_db_session()
-    flora_options = [f.name for f in session.query(Flora).all()] + ["Other..."]
-    user_options = [u.username for u in session.query(User).all()] + ["Other..."]
+    flora_options = [f.name for f in session.query(Flora).all()] + ["Otro..."]
+    user_options = [u.username for u in session.query(User).all()] + ["Otro..."]
     session.close()
     
     # Form inputs
     flora = st.selectbox("Flora:", options=flora_options)
     if flora == "Otro...":
-        flora = st.text_input("Add new flora name:")
+        flora = st.text_input("Añade tu opción de flora...")
     
     username = st.selectbox("Usuario:", options=user_options)
     if username == "Otro...":
-        username = st.text_input("Add new username:")
+        username = st.text_input("Añade un nuevo usuario...")
     
     # Get location
     location = streamlit_geolocation()
