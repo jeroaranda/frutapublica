@@ -148,8 +148,7 @@ def share_flora():
                     
                 except Exception as e:
                     st.error(f"Error uploading file: {str(e)}")
-            st.rerun()
-            st.caching.clear_caching()
+
 
         else:
             st.error("Por favor, rellena todos los campos requeridos.")
