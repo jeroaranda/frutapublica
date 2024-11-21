@@ -11,3 +11,7 @@ sqlalchemy
 SQLAlchemy-Utils
 python-dotenv==1.0.0
 psycopg2-binary==2.9.9
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+google-api-python-client

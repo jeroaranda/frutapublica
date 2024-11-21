@@ -2,3 +2,5 @@ myenv/*
 */__pycache__/*
 __pycache__/*
 .env
+credentials.json
+.DS_Store

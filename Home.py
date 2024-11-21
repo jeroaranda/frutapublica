@@ -29,49 +29,73 @@ def main():
     elif page == "Analytics":
         show_analytics()
 
-def upload_to_public_drive(img_file_buffer, description, upload_url):
+from google.oauth2 import service_account
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaIoBaseUpload
+
+import io
+import os.path
+import pickle
+
+def setup_google_drive():
+    """Sets up Google Drive authentication using Streamlit secrets."""
+    try:
+        credentials = service_account.Credentials.from_service_account_info(
+            st.secrets["google_credentials"],
+            scopes=['https://www.googleapis.com/auth/drive.file']
+        )
+        return build('drive', 'v3', credentials=credentials)
+    except Exception as e:
+        raise Exception(f"Error setting up Google Drive: {str(e)}")
+    
+
+
+def upload_to_drive(img_file_buffer, description, folder_id=None,observation_id=None):
     """
-    Uploads an image to a public drive endpoint using requests
+    Uploads an image to Google Drive
     
     Parameters:
     img_file_buffer: StreamlitUploadedFile - The image buffer from st.camera_input
     description: str - Description/observations for the image
-    upload_url: str - The public upload endpoint URL
+    folder_id: str - Optional Google Drive folder ID to upload to
     
     Returns:
-    dict: Response from the server
+    str: The file ID of the uploaded image
     """
     try:
-        # Generate unique filename
-        filename = f"observation_{str(uuid.uuid1())}.jpg"
+        # Initialize Google Drive service
+        service = setup_google_drive()
         
-        # Prepare the file and metadata
-        files = {
-            'file': (filename, img_file_buffer.getvalue(), 'image/jpeg')
+        # Prepare the file metadata
+        file_metadata = {
+            'name': f'observation_{str(observation_id)}.jpg',
+            'description': description
         }
         
-        # Prepare additional data
-        data = {
-            'description': description,
-            'timestamp': datetime.now().isoformat(),
-        }
+        # If folder_id is provided, add it to metadata
+        if folder_id:
+            file_metadata['parents'] = [folder_id]
         
-        # Send POST request to upload URL
-        response = requests.post(
-            upload_url,
-            files=files,
-            data=data
+        # Create media upload object
+        media = MediaIoBaseUpload(
+            io.BytesIO(img_file_buffer.getvalue()),
+            mimetype='image/jpeg',
+            resumable=True
         )
         
-        # Check if upload was successful
-        response.raise_for_status()
+        # Upload the file
+        file = service.files().create(
+            body=file_metadata,
+            media_body=media,
+            fields='id'
+        ).execute()
         
-        return response.json()
+        return file.get('id')
         
-    except requests.exceptions.RequestException as e:
-        raise Exception(f"Error uploading file: {str(e)}")
-
-# Modified Streamlit code
+    except Exception as e:
+        raise Exception(f"Error uploading to Google Drive: {str(e)}")
 
 def show_map_view():
     st.header("Mapa de Flora")
@@ -133,22 +157,24 @@ def share_flora():
     
     if st.button("Submit", type="primary"):
         if all([flora, username, lat, lon]):
-            add_observation(flora, username, lat, lon, address, description)
+            observation_id = add_observation(flora, username, lat, lon, address, description)
             st.success("Observación grabada correctamente!")
             if img_file_buffer is not None:
                 try:
-                    result = upload_to_public_drive(
+                    # Replace with your Google Drive folder ID
+                    FOLDER_ID = "1yj0_LawzPpLXMYbF15xyfFgoxsB69M8t"  
+                    
+                    file_id = upload_to_drive(
                         img_file_buffer,
                         description,
-                        UPLOAD_URL
+                        folder_id=FOLDER_ID,
+                        observation_id=observation_id
                     )
                     
                     st.success("¡Observación y foto grabadas correctamente!")
-                    st.write(f"Upload result: {result}")
-                    
+                    st.write(f"File ID in Google Drive: {file_id}")
                 except Exception as e:
-                    st.error(f"Error uploading file: {str(e)}")
-
+                    st.error(f"Error uploading to Google Drive: {str(e)}")
 
         else:
             st.error("Por favor, rellena todos los campos requeridos.")

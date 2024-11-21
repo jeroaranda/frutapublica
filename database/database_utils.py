@@ -61,7 +61,9 @@ def add_observation(flora_name, username, lat, lon, address, description):
     
     session.add(observation)
     session.commit()
+    observation_id = observation.id
     session.close()
+    return observation_id
 
 def get_recipes():
     """Get all recipes with their ingredients"""
