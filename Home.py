@@ -2,6 +2,8 @@ import streamlit as st
 from streamlit_geolocation import streamlit_geolocation
 import plotly.express as px
 import uuid
+import requests
+from datetime import datetime
 from database.database_utils import (
     get_observations_df, 
     add_observation, 
@@ -26,6 +28,50 @@ def main():
         show_recipes()
     elif page == "Analytics":
         show_analytics()
+
+def upload_to_public_drive(img_file_buffer, description, upload_url):
+    """
+    Uploads an image to a public drive endpoint using requests
+    
+    Parameters:
+    img_file_buffer: StreamlitUploadedFile - The image buffer from st.camera_input
+    description: str - Description/observations for the image
+    upload_url: str - The public upload endpoint URL
+    
+    Returns:
+    dict: Response from the server
+    """
+    try:
+        # Generate unique filename
+        filename = f"observation_{str(uuid.uuid1())}.jpg"
+        
+        # Prepare the file and metadata
+        files = {
+            'file': (filename, img_file_buffer.getvalue(), 'image/jpeg')
+        }
+        
+        # Prepare additional data
+        data = {
+            'description': description,
+            'timestamp': datetime.now().isoformat(),
+        }
+        
+        # Send POST request to upload URL
+        response = requests.post(
+            upload_url,
+            files=files,
+            data=data
+        )
+        
+        # Check if upload was successful
+        response.raise_for_status()
+        
+        return response.json()
+        
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"Error uploading file: {str(e)}")
+
+# Modified Streamlit code
 
 def show_map_view():
     st.header("Mapa de Flora")
@@ -82,7 +128,7 @@ def share_flora():
     address = st.text_input("Dirección (opcional):")
 
     img_file_buffer = st.camera_input("Toma una foto")
-
+    UPLOAD_URL = "https://drive.google.com/drive/folders/1yj0_LawzPpLXMYbF15xyfFgoxsB69M8t"
     description = st.text_area("Observaciones:")
     
     if st.button("Submit", type="primary"):
@@ -90,11 +136,18 @@ def share_flora():
             add_observation(flora, username, lat, lon, address, description)
             st.success("Observación grabada correctamente!")
             if img_file_buffer is not None:
-                id = uuid.uuid1()
-                # To read image file buffer as bytes:
-                with open (f'{str(id)}.jpg','wb') as file:
-                    file.write(img_file_buffer.getbuffer())
-                bytes_data = img_file_buffer.getvalue()
+                try:
+                    result = upload_to_public_drive(
+                        img_file_buffer,
+                        description,
+                        UPLOAD_URL
+                    )
+                    
+                    st.success("¡Observación y foto grabadas correctamente!")
+                    st.write(f"Upload result: {result}")
+                    
+                except Exception as e:
+                    st.error(f"Error uploading file: {str(e)}")
             st.rerun()
             st.caching.clear_caching()
 
