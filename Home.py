@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_geolocation import streamlit_geolocation
 import plotly.express as px
+import uuid
 from database.database_utils import (
     get_observations_df, 
     add_observation, 
@@ -78,13 +79,24 @@ def share_flora():
             lat = lon = None
     
     address = st.text_input("Dirección (opcional):")
+
+    img_file_buffer = st.camera_input("Toma una foto")
+
     description = st.text_area("Observaciones:")
     
     if st.button("Submit", type="primary"):
         if all([flora, username, lat, lon]):
             add_observation(flora, username, lat, lon, address, description)
             st.success("Observación grabada correctamente!")
+            if img_file_buffer is not None:
+                id = uuid.uuid1()
+                # To read image file buffer as bytes:
+                with open (f'{str(id)}.jpg','wb') as file:
+                    file.write(img_file_buffer.getbuffer())
+                bytes_data = img_file_buffer.getvalue()
             st.rerun()
+            st.caching.clear_caching()
+
         else:
             st.error("Por favor, rellena todos los campos requeridos.")
 
