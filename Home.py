@@ -119,26 +119,28 @@ def show_map_view():
         hover_data=["id", "flora_name", "username", "description"]
     )
         # Configure clustering parameters
+    # Configure clustering parameters - removed the invalid 'line' property
     fig.update_traces(
         cluster=dict(
             enabled=True,
-            maxzoom=15,  # Maximum zoom level for clustering
-            step=5,      # Step size for clustering radius
-            size=20,     # Size of the clusters
-            color='rgba(0, 0, 0, 0.6)',  # Color of clusters
-            opacity=0.8,
-            line=dict(width=1, color='rgba(0, 0, 0, 0.5)')
+            maxzoom=15,
+            step=5,
+            size=20,
+            color='rgba(0, 0, 0, 0.6)',
+            opacity=0.8
         )
     )
 
     # Update layout for better visualization
     fig.update_layout(
         mapbox=dict(
-            center=dict(lat=0, lon=0),  # Adjust center as needed
+            center=dict(lat=0, lon=0),
             zoom=2.8
         ),
         margin=dict(l=0, r=0, t=0, b=0)
     )
+    
+    st.plotly_chart(fig, use_container_width=True)
     st.plotly_chart(fig, use_container_width=True)
 
 def share_flora():
