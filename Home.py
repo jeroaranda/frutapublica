@@ -102,7 +102,7 @@ def show_map_view():
     
     df = get_observations_df()
 
-    df['description'] = df['description'].apply(lambda x: x[:20] + '...' if len(x) > 20 else x)
+    df['description'] = df['description'].apply(lambda x: x[:30] + '...' if len(x) > 30 else x)
     
     
     # Create map
