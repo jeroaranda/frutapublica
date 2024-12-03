@@ -101,7 +101,7 @@ def show_map_view():
     st.header("Mapa de Flora")
     
     df = get_observations_df()
-    df['descpription'] = df['description'].apply(lambda x: x[:30] + '...' if len(x) > 30 else x)
+    df['description'] = df['description'].apply(lambda x: x[:30] + '...' if len(x) > 30 else x)
     
     
     # Create map
