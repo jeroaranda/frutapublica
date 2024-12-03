@@ -126,16 +126,16 @@ def show_map_view():
         )
     )
     
-    # Update layout for cleaner look
-    fig.update_layout(
-        mapbox=dict(
-            style="carto-positron",
-            zoom=2.8,
-            center=dict(lat=df['lat'].mean(), lon=df['lon'].mean())
-        ),
-        margin=dict(l=0, r=0, t=0, b=0)
-    )
-    fig.show()
+    # # Update layout for cleaner look
+    # fig.update_layout(
+    #     mapbox=dict(
+    #         style="carto-positron",
+    #         zoom=2.8,
+    #         center=dict(lat=df['lat'].mean(), lon=df['lon'].mean())
+    #     ),
+    #     margin=dict(l=0, r=0, t=0, b=0)
+    # )
+    # fig.show()
     
     st.plotly_chart(fig, use_container_width=True)
 
