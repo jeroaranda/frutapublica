@@ -106,11 +106,11 @@ def show_map_view():
     
     # Create map
     df['size'] = .2
-    fig = px.scatter_mapbox(
+    fig = px.scatter_map(
         df,
         lat="lat",
         lon="lon",
-        size="cnt",
+        size="size",
         color="flora_name",
         mapbox_style="carto-positron",
         zoom=2.8,
