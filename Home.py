@@ -103,30 +103,33 @@ def show_map_view():
     
     df = get_observations_df()
     df['description'] = df['description'].apply(lambda x: x[:40] + '...' if len(x) > 40 else x)
-    df['size'] = 10  # Constant size for all points
+    df['size'] = 10
     
     # Create initial plot with px for nice color handling
     fig = px.scatter_mapbox(
         df,
         lat="lat",
         lon="lon",
-        size='size',
         color="flora_name",
         mapbox_style="carto-positron",
         zoom=2.8,
-        size_max=10,
         hover_data=["id", "flora_name", "username", "description"]
     )
 
-    # Add clustering to the first trace
-    fig.data[0].cluster = dict(
-        enabled=True,
-        step=2,        # Small step size for more granular clustering
-        size=20,       # Moderate size for clusters
-        maxzoom=10     # City level zoom threshold
+    # Override the first trace completely with clustering settings
+    fig.update_traces(
+        marker=dict(size=10),  # Consistent marker size
+        cluster=dict(
+            enabled=True,
+            step=1,           # Minimum step for maximum clustering
+            size=50,          # Large enough to be visible
+            maxzoom=15,       # Higher zoom level before breaking clusters
+            opacity=0.8,
+            color='rgba(180,180,180,0.8)'  # Neutral color for clusters
+        )
     )
     
-    # Clean up layout
+    # Update layout
     fig.update_layout(
         margin=dict(l=0, r=0, t=0, b=0),
     )
