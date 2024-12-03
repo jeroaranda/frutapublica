@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit_geolocation import streamlit_geolocation
 import plotly.express as px
 import uuid
+import plotly.graph_objects as go
 import requests
 from datetime import datetime
 from database.database_utils import (
@@ -105,41 +106,49 @@ def show_map_view():
     df['description'] = df['description'].apply(lambda x: x[:40] + '...' if len(x) > 40 else x)
     
     
-    # Create map
-    df['size'] = .2
-    fig = px.scatter_mapbox(
-        df,
-        lat="lat",
-        lon="lon",
-        size='size',
-        color="flora_name",
-        mapbox_style="carto-positron",
-        zoom=2.8,
-        size_max=10,
-        hover_data=["id", "flora_name", "username", "description"]
-    )
-        # Configure clustering parameters
-    # Configure clustering parameters - removed the invalid 'line' property
-    fig.update_traces(
-        cluster=dict(
-            enabled=True,
-            maxzoom=15,
-            step=5,
-            size=20,
-            color='rgba(0, 0, 0, 0.6)',
-            opacity=0.8
+    # Create figure directly with go.Figure
+    fig = go.Figure()
+
+    # Add scattermapbox trace
+    fig.add_trace(
+        go.Scattermapbox(
+            lat=df['lat'],
+            lon=df['lon'],
+            mode='markers',
+            marker=dict(
+                size=10,
+                color=df['flora_name'].astype('category').cat.codes,  # Convert flora_name to color codes
+                colorscale='Viridis',
+                showscale=True,
+            ),
+            text=df['flora_name'],
+            hovertemplate="<br>".join([
+                "ID: %{customdata[0]}",
+                "Flora: %{customdata[1]}",
+                "User: %{customdata[2]}",
+                "Description: %{customdata[3]}<extra></extra>"
+            ]),
+            customdata=df[['id', 'flora_name', 'username', 'description']],
+            cluster=dict(
+                enabled=True,
+                step=20,  # Increased step size
+                size=40,  # Increased cluster size
+                maxzoom=8  # Lowered maxzoom to maintain clusters longer
+            )
         )
     )
 
-    # Update layout for better visualization
+    # Update layout
     fig.update_layout(
         mapbox=dict(
-            center=dict(lat=0, lon=0),
-            zoom=2.8
+            style="carto-positron",
+            zoom=2.8,
+            center=dict(lat=df['lat'].mean(), lon=df['lon'].mean())
         ),
-        margin=dict(l=0, r=0, t=0, b=0)
+        margin=dict(l=0, r=0, t=0, b=0),
+        showlegend=False
     )
-    fig.show()
+    
     st.plotly_chart(fig, use_container_width=True)
 
 def share_flora():
