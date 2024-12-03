@@ -106,7 +106,7 @@ def show_map_view():
     
     # Create map
     df['size'] = .2
-    fig = px.scatter_map(
+    fig = px.scatter_mapbox(
         df,
         lat="lat",
         lon="lon",
