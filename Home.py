@@ -98,7 +98,6 @@ def upload_to_drive(img_file_buffer, description, folder_id=None,observation_id=
         
     except Exception as e:
         raise Exception(f"Error uploading to Google Drive: {str(e)}")
-
 def show_map_view():
     st.header("Mapa de Flora")
     
@@ -106,7 +105,7 @@ def show_map_view():
     df['description'] = df['description'].apply(lambda x: x[:40] + '...' if len(x) > 40 else x)
     df['size'] = 10
     
-    # Keep your original working code
+    # Your original map code
     fig = px.scatter_mapbox(
         df,
         lat="lat",
@@ -119,10 +118,17 @@ def show_map_view():
         hover_data=["id", "flora_name", "username", "description"]
     )
 
-    # Just add this one line for clustering
     fig.update_traces(cluster=dict(enabled=True))
     
     st.plotly_chart(fig, use_container_width=True)
+    
+    # Add download button
+    st.download_button(
+        label="Descargar datos (CSV)",
+        data=df.to_csv(index=False).encode('utf-8'),
+        file_name='flora_data.csv',
+        mime='text/csv'
+    )
 
 def share_flora():
     st.header("Comparte flora")
