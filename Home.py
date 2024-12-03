@@ -135,6 +135,7 @@ def show_map_view():
         ),
         margin=dict(l=0, r=0, t=0, b=0)
     )
+    fig.show()
     
     st.plotly_chart(fig, use_container_width=True)
 
