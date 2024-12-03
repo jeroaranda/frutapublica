@@ -110,13 +110,14 @@ def show_map_view():
         df,
         lat="lat",
         lon="lon",
-        size="size",
+        size='size',
         color="flora_name",
         mapbox_style="carto-positron",
         zoom=2.8,
+        size_max=10,
         hover_data=["flora_name","id", "username", "description"]
     )
-    fig.update_traces(cluster_enabled=True, selector=dict(type='scattermapbox'))
+    fig.update_traces(cluster=dict(enabled=True))
     st.plotly_chart(fig, use_container_width=True)
 
 def share_flora():
