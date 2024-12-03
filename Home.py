@@ -130,8 +130,7 @@ def show_map_view():
                 step=1,
                 size=20,
                 maxzoom=15,
-                color='rgba(65, 105, 225, 0.8)',
-                labels=True  # This should enable numeric labels on clusters
+                color='rgba(65, 105, 225, 0.8)'
             )
         )
     )
