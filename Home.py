@@ -101,7 +101,7 @@ def show_map_view():
     st.header("Mapa de Flora")
     
     df = get_observations_df()
-    df['description'] = df['description'].apply(lambda x: x[:20] + '...' if len(x) > 20 else x)
+    df['description'] = df['description'].apply(lambda x: x[:30] + '...' if len(x) > 30 else x)
     
     
     # Create map
@@ -110,11 +110,10 @@ def show_map_view():
         df,
         lat="lat",
         lon="lon",
-        size='size',
+        size="cnt"
         color="flora_name",
         mapbox_style="carto-positron",
         zoom=2.8,
-        size_max=10,
         hover_data=["flora_name","id", "username", "description"]
     )
     fig.update_traces(cluster=dict(enabled=True))
