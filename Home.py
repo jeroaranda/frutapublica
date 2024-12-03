@@ -125,7 +125,7 @@ def show_map_view():
     # Add download button
     st.download_button(
         label="Descargar datos (CSV)",
-        data=df[['lat','lon','description','id','flora_name','username']].to_csv(index=False).encode('utf-8'),
+        data=df[['datetime','address','lat','lon','description','id','flora_name','username']].to_csv(index=False).encode('utf-8'),
         file_name='flora_data.csv',
         mime='text/csv'
     )
