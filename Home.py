@@ -110,7 +110,7 @@ def show_map_view():
         df,
         lat="lat",
         lon="lon",
-        size="cnt"
+        size="cnt",
         color="flora_name",
         mapbox_style="carto-positron",
         zoom=2.8,
