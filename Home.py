@@ -103,35 +103,38 @@ def show_map_view():
     
     df = get_observations_df()
     df['description'] = df['description'].apply(lambda x: x[:40] + '...' if len(x) > 40 else x)
-    df['size'] = 10
     
-    # Create initial plot with px for nice color handling
-    fig = px.scatter_mapbox(
+    fig = px.scatter_map(
         df,
         lat="lat",
         lon="lon",
         color="flora_name",
         mapbox_style="carto-positron",
         zoom=2.8,
-        hover_data=["id", "flora_name", "username", "description"]
+        hover_data=["id", "flora_name", "username", "description"],
+        size_max=10
     )
 
-    # Override the first trace completely with clustering settings
+    # Update to scatter_map with clustering
     fig.update_traces(
-        marker=dict(size=10),  # Consistent marker size
+        marker=dict(size=10),
         cluster=dict(
             enabled=True,
-            step=1,           # Minimum step for maximum clustering
-            size=50,          # Large enough to be visible
-            maxzoom=15,       # Higher zoom level before breaking clusters
-            opacity=0.8,
-            color='rgba(180,180,180,0.8)'  # Neutral color for clusters
+            step=1,
+            size=20,
+            maxzoom=15,
+            color='rgba(65, 105, 225, 0.8)'
         )
     )
     
-    # Update layout
+    # Update layout for cleaner look
     fig.update_layout(
-        margin=dict(l=0, r=0, t=0, b=0),
+        mapbox=dict(
+            style="carto-positron",
+            zoom=2.8,
+            center=dict(lat=df['lat'].mean(), lon=df['lon'].mean())
+        ),
+        margin=dict(l=0, r=0, t=0, b=0)
     )
     
     st.plotly_chart(fig, use_container_width=True)
