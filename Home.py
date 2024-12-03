@@ -117,7 +117,7 @@ def show_map_view():
             mode='markers',
             marker=dict(
                 size=10,
-                color=df['flora_name'].astype('category').cat.codes,  # Convert flora_name to color codes
+                color=df['flora_name'],
             ),
             text=df['flora_name'],
             hovertemplate="<br>".join([
