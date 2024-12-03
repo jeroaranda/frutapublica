@@ -116,10 +116,29 @@ def show_map_view():
         mapbox_style="carto-positron",
         zoom=2.8,
         size_max=10,
-        cluster= {'maxzoom': 14},
         hover_data=["id", "flora_name", "username", "description"]
     )
-    fig.update_traces(cluster=dict(enabled=True))
+        # Configure clustering parameters
+    fig.update_traces(
+        cluster=dict(
+            enabled=True,
+            maxzoom=15,  # Maximum zoom level for clustering
+            step=5,      # Step size for clustering radius
+            size=20,     # Size of the clusters
+            color='rgba(0, 0, 0, 0.6)',  # Color of clusters
+            opacity=0.8,
+            line=dict(width=1, color='rgba(0, 0, 0, 0.5)')
+        )
+    )
+
+    # Update layout for better visualization
+    fig.update_layout(
+        mapbox=dict(
+            center=dict(lat=0, lon=0),  # Adjust center as needed
+            zoom=2.8
+        ),
+        margin=dict(l=0, r=0, t=0, b=0)
+    )
     st.plotly_chart(fig, use_container_width=True)
 
 def share_flora():
