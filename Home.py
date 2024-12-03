@@ -98,15 +98,30 @@ def upload_to_drive(img_file_buffer, description, folder_id=None,observation_id=
     except Exception as e:
         raise Exception(f"Error uploading to Google Drive: {str(e)}")
 
+import random
+
+def generate_distinct_colors(n):
+    """Generate n visually distinct colors"""
+    distinct_colors = [
+        '#e6194B', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#42d4f4', 
+        '#f032e6', '#bfef45', '#fabed4', '#469990', '#dcbeff', '#9A6324', '#800000', 
+        '#aaffc3', '#808000', '#ffd8b1', '#000075', '#a9a9a9', '#000000'
+    ]
+    # If we need more colors than in our list, we'll cycle through them
+    return distinct_colors[:n] if n <= len(distinct_colors) else distinct_colors * (n // len(distinct_colors) + 1)
+
 def show_map_view():
     st.header("Mapa de Flora")
     
     df = get_observations_df()
-
     df['description'] = df['description'].apply(lambda x: x[:40] + '...' if len(x) > 40 else x)
     
+    # Create color mapping for flora types
+    unique_flora = df['flora_name'].unique()
+    colors = generate_distinct_colors(len(unique_flora))
+    color_map = dict(zip(unique_flora, colors))
     
-    # Create figure directly with go.Figure
+    # Create figure
     fig = go.Figure()
 
     # Add scattermapbox trace
@@ -116,8 +131,9 @@ def show_map_view():
             lon=df['lon'],
             mode='markers',
             marker=dict(
-                size=10,
-                color=df['flora_name'],
+                size=8,
+                color=[color_map[flora] for flora in df['flora_name']],
+                opacity=0.8
             ),
             text=df['flora_name'],
             hovertemplate="<br>".join([
@@ -129,12 +145,26 @@ def show_map_view():
             customdata=df[['id', 'flora_name', 'username', 'description']],
             cluster=dict(
                 enabled=True,
-                step=20,  # Increased step size
-                size=40,  # Increased cluster size
-                maxzoom=8  # Lowered maxzoom to maintain clusters longer
+                step=3,        # Smaller step size for more granular clustering
+                size=20,       # Moderate cluster size
+                maxzoom=12,    # Higher maxzoom for city-level clustering
+                color='rgba(0,0,0,0.5)'  # Dark cluster color
             )
         )
     )
+
+    # Add a trace for each flora type to create a legend
+    for flora, color in color_map.items():
+        fig.add_trace(
+            go.Scattermapbox(
+                lat=[None],
+                lon=[None],
+                mode='markers',
+                marker=dict(size=8, color=color),
+                name=flora,
+                showlegend=True
+            )
+        )
 
     # Update layout
     fig.update_layout(
@@ -144,7 +174,14 @@ def show_map_view():
             center=dict(lat=df['lat'].mean(), lon=df['lon'].mean())
         ),
         margin=dict(l=0, r=0, t=0, b=0),
-        showlegend=False
+        showlegend=True,
+        legend=dict(
+            yanchor="top",
+            y=0.99,
+            xanchor="left",
+            x=0.01,
+            bgcolor="rgba(255,255,255,0.8)"
+        )
     )
     
     st.plotly_chart(fig, use_container_width=True)
