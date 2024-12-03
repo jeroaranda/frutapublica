@@ -102,7 +102,7 @@ def show_map_view():
     st.header("Mapa de Flora")
     
     df = get_observations_df()
-    df['description'] = df['description'].apply(lambda x: x[:40] + '...' if len(x) > 40 else x)
+    df['shortdescription'] = df['description'].apply(lambda x: x[:40] + '...' if len(x) > 40 else x)
     df['size'] = 10
     
     # Your original map code
@@ -115,7 +115,7 @@ def show_map_view():
         mapbox_style="carto-positron",
         zoom=2.8,
         size_max=10,
-        hover_data=["id", "flora_name", "username", "description"]
+        hover_data=["id", "flora_name", "username", "shortdescrption"],
     )
 
     fig.update_traces(cluster=dict(enabled=True))
@@ -125,7 +125,7 @@ def show_map_view():
     # Add download button
     st.download_button(
         label="Descargar datos (CSV)",
-        data=df.to_csv(index=False).encode('utf-8'),
+        data=df[['lat','lon','description','id','flora_name','username']].to_csv(index=False).encode('utf-8'),
         file_name='flora_data.csv',
         mime='text/csv'
     )
