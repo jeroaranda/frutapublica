@@ -101,6 +101,7 @@ def show_map_view():
     st.header("Mapa de Flora")
     
     df = get_observations_df()
+
     df['description'] = df['description'].apply(lambda x: x[:20] + '...' if len(x) > 20 else x)
     
     
@@ -117,7 +118,6 @@ def show_map_view():
         size_max=10,
         hover_data=["id", "flora_name", "username", "description"]
     )
-    fig.update_traces(cluster_enabled=True, selector=dict(type='scattermapbox'))
     st.plotly_chart(fig, use_container_width=True)
 
 def share_flora():
