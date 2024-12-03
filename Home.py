@@ -117,7 +117,7 @@ def show_map_view():
         size_max=10,
         hover_data=["id", "flora_name", "username", "description"]
     )
-    fig.update_traces(cluster=dict(enabled=True))
+    fig.update_traces(cluster_enabled=True, selector=dict(type='scattermapbox'))
     st.plotly_chart(fig, use_container_width=True)
 
 def share_flora():
