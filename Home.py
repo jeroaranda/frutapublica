@@ -139,8 +139,7 @@ def show_map_view():
         ),
         margin=dict(l=0, r=0, t=0, b=0)
     )
-    
-    st.plotly_chart(fig, use_container_width=True)
+    fig.show()
     st.plotly_chart(fig, use_container_width=True)
 
 def share_flora():
