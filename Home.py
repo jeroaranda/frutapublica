@@ -104,38 +104,45 @@ def show_map_view():
     df = get_observations_df()
     df['description'] = df['description'].apply(lambda x: x[:40] + '...' if len(x) > 40 else x)
     
-    fig = px.scatter_map(
-        df,
-        lat="lat",
-        lon="lon",
-        color="flora_name",
-        zoom=2.8,
-        hover_data=["id", "flora_name", "username", "description"],
-        size_max=10
-    )
+    fig = go.Figure()
 
-    # Update to scatter_map with clustering
-    fig.update_traces(
-        marker=dict(size=10),
-        cluster=dict(
-            enabled=True,
-            step=1,
-            size=20,
-            maxzoom=15,
-            color='rgba(65, 105, 225, 0.8)'
+    fig.add_trace(
+        go.Scattermapbox(
+            lat=df['lat'],
+            lon=df['lon'],
+            mode='markers',
+            marker=dict(
+                size=10,
+                color=pd.factorize(df['flora_name'])[0],
+                colorscale='Viridis',
+            ),
+            text=df['flora_name'],
+            customdata=df[['id', 'flora_name', 'username', 'description']],
+            hovertemplate="<br>".join([
+                "ID: %{customdata[0]}",
+                "Flora: %{customdata[1]}",
+                "User: %{customdata[2]}",
+                "Description: %{customdata[3]}<extra></extra>"
+            ]),
+            cluster=dict(
+                enabled=True,
+                step=1,
+                size=20,
+                maxzoom=15,
+                color='rgba(65, 105, 225, 0.8)',
+                labels=True  # This should enable numeric labels on clusters
+            )
         )
     )
-    
-    # # Update layout for cleaner look
-    # fig.update_layout(
-    #     mapbox=dict(
-    #         style="carto-positron",
-    #         zoom=2.8,
-    #         center=dict(lat=df['lat'].mean(), lon=df['lon'].mean())
-    #     ),
-    #     margin=dict(l=0, r=0, t=0, b=0)
-    # )
-    # fig.show()
+
+    fig.update_layout(
+        mapbox=dict(
+            style="carto-positron",
+            zoom=2.8,
+            center=dict(lat=df['lat'].mean(), lon=df['lon'].mean())
+        ),
+        margin=dict(l=0, r=0, t=0, b=0)
+    )
     
     st.plotly_chart(fig, use_container_width=True)
 
