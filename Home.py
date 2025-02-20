@@ -141,7 +141,7 @@ def show_map_view():
         hover_data=["id", "flora_name", "username", "shortdescription"],map_style="basic"
     )
 
-    fig.update_traces(cluster=dict(enabled=True,maxzoom=15))
+    fig.update_traces(cluster=dict(enabled=True,size=5))
 
     st.plotly_chart(fig, use_container_width=True)
     
