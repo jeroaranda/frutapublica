@@ -105,7 +105,7 @@ def show_map_view():
 
     df = get_observations_df()
     df['shortdescription'] = df['description'].apply(lambda x: x[:40] + '...' if len(x) > 40 else x)
-    df['size'] = 100
+    df['size'] = 1s0
     df['lat'] = df['lat'].astype(float)
     df['lon'] = df['lon'].astype(float)
 
@@ -130,7 +130,7 @@ def show_map_view():
     )
 
     # # Your original map code
-    fig = px.scatter_mapbox(
+    fig = px.scatter_map(
         df,
         lat="lat",
         lon="lon",
@@ -138,7 +138,7 @@ def show_map_view():
         color="flora_name",
         zoom=2.8,
         size_max=10,
-        hover_data=["id", "flora_name", "username", "shortdescription"]
+        hover_data=["id", "flora_name", "username", "shortdescription"],map_style="basic"ß
     )
 
     fig.update_traces(cluster=dict(enabled=True))
