@@ -138,7 +138,7 @@ def show_map_view():
         color="flora_name",
         zoom=2.8,
         size_max=10,
-        hover_data=["id", "flora_name", "username", "shortdescription"],map_style="basic"ß
+        hover_data=["id", "flora_name", "username", "shortdescription"],map_style="basic"
     )
 
     fig.update_traces(cluster=dict(enabled=True))
