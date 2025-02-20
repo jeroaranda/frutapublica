@@ -106,7 +106,7 @@ def show_map_view():
     df['size'] = 100
     df['lat'] = df['lat'].astype(float)
     df['lon'] = df['lon'].astype(float)
-    
+
     # Your original map code
     fig = px.scatter_mapbox(
         df,
@@ -117,7 +117,7 @@ def show_map_view():
         mapbox_style="carto-positron",
         zoom=2.8,
         size_max=10,
-        hover_data=["id", "flora_name", "username", "shortdescription"],
+        hover_data=["id", "flora_name", "username", "shortdescription"],visible='legendonly'
     )
 
     #fig.update_traces(cluster=dict(enabled=True))
