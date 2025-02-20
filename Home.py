@@ -104,9 +104,9 @@ def show_map_view():
     df = get_observations_df()
     df['shortdescription'] = df['description'].apply(lambda x: x[:40] + '...' if len(x) > 40 else x)
     df['size'] = 100
-    st.warning(df.shape)
-    st.warning(df[['lat','lon']].head())
-
+    df['lat'] = df['lat'].astype(float)
+    df['lon'] = df['lon'].astype(float)
+    
     # Your original map code
     fig = px.scatter_mapbox(
         df,
