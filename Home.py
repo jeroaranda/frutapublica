@@ -110,7 +110,7 @@ def show_map_view():
     colors = px.colors.qualitative.D3[len(fruits)]
     df['colors'] = df['flora_name'].apply(lambda x: colors[fruits.index(x)])
 
-    st.map(data=df, latitude='lat', longitude='lon', color='colors', size='size'])
+    st.map(data=df, latitude='lat', longitude='lon', color='colors', size='size')
 
     # # Your original map code
     # fig = px.scatter_map(
