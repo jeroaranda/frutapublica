@@ -114,7 +114,6 @@ def show_map_view():
         lon="lon",
         size='size',
         color="flora_name",
-        mapbox_style="carto-positron",
         zoom=2.8,
         size_max=10,
         hover_data=["id", "flora_name", "username", "shortdescription"]
