@@ -130,20 +130,20 @@ def show_map_view():
     )
 
     # # Your original map code
-    # fig = px.scatter_map(
-    #     df,
-    #     lat="lat",
-    #     lon="lon",
-    #     size='size',
-    #     color="flora_name",
-    #     zoom=2.8,
-    #     size_max=10,
-    #     hover_data=["id", "flora_name", "username", "shortdescription"]
-    # )
+    fig = px.scatter_map(
+        df,
+        lat="lat",
+        lon="lon",
+        size='size',
+        color="flora_name",
+        zoom=2.8,
+        size_max=10,
+        hover_data=["id", "flora_name", "username", "shortdescription"]
+    )
 
-    # fig.update_traces(cluster=dict(enabled=True))
-    # st.write(fig)
-    # st.plotly_chart(fig, use_container_width=True)
+    fig.update_traces(cluster=dict(enabled=True))
+
+    st.plotly_chart(fig, use_container_width=True)
     
     # Add download button
     st.download_button(
