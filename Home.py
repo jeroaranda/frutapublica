@@ -109,7 +109,10 @@ def show_map_view():
     fruits = df['flora_name'].unique()
     # more fruits than colors
     colors = px.colors.qualitative.D3[len(fruits)%len(px.colors.qualitative.D3)]
-    df['colors'] = df['flora_name'].apply(lambda x: colors[fruits.index(x)])
+    # assign colors to each fruit
+    colors = colors[:len(fruits)]
+    for i, fruit in enumerate(fruits):
+        df.loc[df['flora_name'] == fruit, 'colors'] = colors[i]
 
     st.map(data=df, latitude='lat', longitude='lon', color='colors', size='size')
 
