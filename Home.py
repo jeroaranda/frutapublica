@@ -117,7 +117,7 @@ def show_map_view():
         mapbox_style="carto-positron",
         zoom=2.8,
         size_max=10,
-        hover_data=["id", "flora_name", "username", "shortdescription"],visible='legendonly'
+        hover_data=["id", "flora_name", "username", "shortdescription"]
     )
 
     #fig.update_traces(cluster=dict(enabled=True))
