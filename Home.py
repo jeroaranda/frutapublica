@@ -121,13 +121,13 @@ def show_map_view():
     df['color'] = df['flora_name'].map(color_map)
 
     # Create the map
-    st.map(
-        data=df,
-        latitude='lat',
-        longitude='lon',
-        size='size',
-        color='color'
-    )
+    # st.map(
+    #     data=df,
+    #     latitude='lat',
+    #     longitude='lon',
+    #     size='size',
+    #     color='color'
+    # )
 
     # # Your original map code
     fig = px.scatter_map(
