@@ -105,7 +105,7 @@ def show_map_view():
 
     df = get_observations_df()
     df['shortdescription'] = df['description'].apply(lambda x: x[:40] + '...' if len(x) > 40 else x)
-    df['size'] = 1s0
+    df['size'] = 10
     df['lat'] = df['lat'].astype(float)
     df['lon'] = df['lon'].astype(float)
 
