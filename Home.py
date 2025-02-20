@@ -130,7 +130,7 @@ def show_map_view():
     )
 
     # # Your original map code
-    fig = px.scatter_map(
+    fig = px.scatter_mapbox(
         df,
         lat="lat",
         lon="lon",
