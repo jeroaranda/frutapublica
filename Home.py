@@ -107,7 +107,8 @@ def show_map_view():
     df['lat'] = df['lat'].astype(float)
     df['lon'] = df['lon'].astype(float)
     fruits = df['flora_name'].unique()
-    colors = px.colors.qualitative.D3[len(fruits)]
+    # more fruits than colors
+    colors = px.colors.qualitative.D3[len(fruits)%len(px.colors.qualitative.D3)]
     df['colors'] = df['flora_name'].apply(lambda x: colors[fruits.index(x)])
 
     st.map(data=df, latitude='lat', longitude='lon', color='colors', size='size')
