@@ -106,22 +106,27 @@ def show_map_view():
     df['size'] = 100
     df['lat'] = df['lat'].astype(float)
     df['lon'] = df['lon'].astype(float)
+    fruits = df['flora_name'].unique()
+    colors = px.colors.qualitative.D3[len(fruits)]
+    df['colors'] = df['flora_name'].apply(lambda x: colors[fruits.index(x)])
 
-    # Your original map code
-    fig = px.scatter_map(
-        df,
-        lat="lat",
-        lon="lon",
-        size='size',
-        color="flora_name",
-        zoom=2.8,
-        size_max=10,
-        hover_data=["id", "flora_name", "username", "shortdescription"]
-    )
+    st.map(data=df, latitude='lat', longitude='lon', color='colors', size='size'])
 
-    fig.update_traces(cluster=dict(enabled=True))
-    
-    st.plotly_chart(fig, use_container_width=True)
+    # # Your original map code
+    # fig = px.scatter_map(
+    #     df,
+    #     lat="lat",
+    #     lon="lon",
+    #     size='size',
+    #     color="flora_name",
+    #     zoom=2.8,
+    #     size_max=10,
+    #     hover_data=["id", "flora_name", "username", "shortdescription"]
+    # )
+
+    # fig.update_traces(cluster=dict(enabled=True))
+    # st.write(fig)
+    # st.plotly_chart(fig, use_container_width=True)
     
     # Add download button
     st.download_button(
