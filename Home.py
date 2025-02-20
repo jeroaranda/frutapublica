@@ -101,20 +101,33 @@ def upload_to_drive(img_file_buffer, description, folder_id=None,observation_id=
 def show_map_view():
     st.header("Mapa de Flora")
     
+    
+
     df = get_observations_df()
     df['shortdescription'] = df['description'].apply(lambda x: x[:40] + '...' if len(x) > 40 else x)
     df['size'] = 100
     df['lat'] = df['lat'].astype(float)
     df['lon'] = df['lon'].astype(float)
-    fruits = df['flora_name'].unique()
-    # more fruits than colors
-    colors = px.colors.qualitative.D3[len(fruits)%len(px.colors.qualitative.D3)]
-    # assign colors to each fruit
-    colors = colors[:len(fruits)]
-    for i, fruit in enumerate(fruits):
-        df.loc[df['flora_name'] == fruit, 'colors'] = colors[i]
 
-    st.map(data=df, latitude='lat', longitude='lon', color='colors', size='size')
+    # Get unique fruits
+    fruits = df['flora_name'].unique()
+
+    # Create color mapping using Plotly's qualitative colors
+    color_palette = px.colors.qualitative.D3
+    colors = [color_palette[i % len(color_palette)] for i in range(len(fruits))]
+    color_map = dict(zip(fruits, colors))
+
+    # Add color column
+    df['color'] = df['flora_name'].map(color_map)
+
+    # Create the map
+    st.map(
+        data=df,
+        latitude='lat',
+        longitude='lon',
+        size='size',
+        color='color'
+    )
 
     # # Your original map code
     # fig = px.scatter_map(
