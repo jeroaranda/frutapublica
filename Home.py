@@ -136,7 +136,7 @@ def show_map_view():
         lon="lon",
         size='size',
         color="flora_name",
-        zoom=2.8,
+        zoom=2.9,
         size_max=10,
         hover_data=["id", "flora_name", "username", "shortdescription"],map_style="basic"
     )
