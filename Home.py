@@ -108,7 +108,7 @@ def show_map_view():
     df['lon'] = df['lon'].astype(float)
 
     # Your original map code
-    fig = px.scatter_mapbox(
+    fig = px.scatter_map(
         df,
         lat="lat",
         lon="lon",
