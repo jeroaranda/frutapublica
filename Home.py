@@ -104,10 +104,15 @@ def show_map_view():
     
 
     df = get_observations_df()
+    # Ensure description exists and is a string to avoid NoneType errors
+    if 'description' not in df.columns:
+        df['description'] = ''
+    df['description'] = df['description'].fillna('').astype(str)
     df['shortdescription'] = df['description'].apply(lambda x: x[:40] + '...' if len(x) > 40 else x)
     df['size'] = 10
-    df['lat'] = df['lat'].astype(float)
-    df['lon'] = df['lon'].astype(float)
+    # Coerce lat/lon to numeric, invalid values become NaN
+    df['lat'] = pd.to_numeric(df.get('lat', pd.Series()), errors='coerce')
+    df['lon'] = pd.to_numeric(df.get('lon', pd.Series()), errors='coerce')
 
     # Get unique fruits
     fruits = df['flora_name'].unique()
