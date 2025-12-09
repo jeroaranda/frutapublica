@@ -1,0 +1,130 @@
+datetime,address,lat,lon,description,id,flora_name,username
+2021-11-16 03:36:00.000000,"19.344804763793945,-99.21400451660156",19.344804763793945,-99.21400451660156," IMG-20211116-WA0027.jpg (file attached)  location: https://maps.google.com/?q=19.344804763793945,-99.21400451660156  Higo  Que pez sin foto vale,  ?  Menos no?",1,Higo,Jero Aranda
+2021-11-19 04:39:00.000000,"19.43083381652832,-99.17647552490234",19.43083381652832,-99.17647552490234," IMG-20211119-WA0012.jpg (file attached)  location: https://maps.google.com/?q=19.43083381652832,-99.17647552490234",2,Cafe y nispero,Jero Aranda
+2021-11-20 04:26:00.000000,"19.4319218,-99.1805149",19.4319218,-99.1805149," IMG-20211120-WA0026.jpg (file attached)  location: https://maps.google.com/?q=19.4319218,-99.1805149",3,Nispero,José Pesqueira
+2021-11-20 04:29:00.000000,"19.4344857,-99.181529",19.4344857,-99.181529," Nel  Todavía  IMG-20211120-WA0027.jpg (file attached)  location: https://maps.google.com/?q=19.4344857,-99.181529",4,Izote,José Pesqueira
+2021-11-20 04:36:00.000000,"19.4347224,-99.1812755",19.4347224,-99.1812755," IMG-20211120-WA0028.jpg (file attached)  location: https://maps.google.com/?q=19.4347224,-99.1812755",5,Romero,José Pesqueira
+2021-11-20 04:39:00.000000,"19.4333324,-99.1803811",19.4333324,-99.1803811," IMG-20211120-WA0030.jpg (file attached)  location: https://maps.google.com/?q=19.4333324,-99.1803811  IMG-20211120-WA0031.jpg (file attached)",6,Gasparito,José Pesqueira
+2021-11-20 04:39:00.000000,"19.4333324,-99.1803811",19.4333324,-99.1803811," IMG-20211120-WA0030.jpg (file attached)  location: https://maps.google.com/?q=19.4333324,-99.1803811  IMG-20211120-WA0031.jpg (file attached)",7,Gasparito,José Pesqueira
+2021-11-20 04:40:00.000000,"19.43279266357422,-99.18031311035156",19.43279266357422,-99.18031311035156," IMG-20211120-WA0032.jpg (file attached)  location: https://maps.google.com/?q=19.43279266357422,-99.18031311035156",8,Mandarina,Lucía Pesqueira
+2021-11-20 04:41:00.000000,"19.4325,-99.1804184",19.4325,-99.1804184," IMG-20211120-WA0033.jpg (file attached)  location: https://maps.google.com/?q=19.4325,-99.1804184",9,Gasparito,José Pesqueira
+2021-11-20 04:54:00.000000,"19.4295534,-99.1768142",19.4295534,-99.1768142," IMG-20211120-WA0034.jpg (file attached)  location: https://maps.google.com/?q=19.4295534,-99.1768142",10,Limon,José Pesqueira
+2021-11-20 05:29:00.000000,"19.4284449,-99.2000398",19.4284449,-99.2000398," IMG-20211120-WA0038.jpg (file attached)  location: https://maps.google.com/?q=19.4284449,-99.2000398",11,Desconocida,José Pesqueira
+2021-11-20 05:40:00.000000,"19.4322939,-99.20349",19.4322939,-99.20349," IMG-20211120-WA0040.jpg (file attached)  location: https://maps.google.com/?q=19.4322939,-99.20349",12,Guayaba,José Pesqueira
+2021-11-20 06:03:00.000000,"19.4365585,-99.1896434",19.4365585,-99.1896434," IMG-20211120-WA0041.jpg (file attached)  location: https://maps.google.com/?q=19.4365585,-99.1896434",13,Higo,José Pesqueira
+2021-11-21 12:23:00.000000,"19.427473068237305,-99.18206787109375",19.427473068237305,-99.18206787109376," IMG-20211121-WA0003.jpg (file attached)  location: https://maps.google.com/?q=19.427473068237305,-99.18206787109375",14,Higo,Ixchel
+2021-11-22 05:30:00.000000,"19.4008928,-99.1805356",19.4008928,-99.1805356," IMG-20211122-WA0019.jpg (file attached)  location: https://maps.google.com/?q=19.4008928,-99.1805356",15,Nispero,José Pesqueira
+2021-11-23 02:42:00.000000,"19.4104984,-99.1807486",19.4104984,-99.1807486," IMG-20211123-WA0008.jpg (file attached)  location: https://maps.google.com/?q=19.4104984,-99.1807486  Flor de isote",16,Izote,José Pesqueira
+2021-11-23 03:53:00.000000,"19.524696350097656,-96.9104995727539",19.524696350097656,-96.9104995727539," IMG-20211123-WA0010.jpg (file attached)  location: https://maps.google.com/?q=19.524696350097656,-96.9104995727539  IMG-20211123-WA0011.jpg (file attached)  location: https://maps.google.com/?q=19.524656295776367,-96.9105224609375",17,Macadamia,Camila Rangel
+2021-11-23 03:53:00.000000,"19.524696350097656,-96.9104995727539",19.524696350097656,-96.9104995727539," IMG-20211123-WA0010.jpg (file attached)  location: https://maps.google.com/?q=19.524696350097656,-96.9104995727539  IMG-20211123-WA0011.jpg (file attached)  location: https://maps.google.com/?q=19.524656295776367,-96.9105224609375",18,Naranja,Camila Rangel
+2021-11-23 03:53:00.000000,"19.524656295776367,-96.9105224609375",19.524656295776367,-96.9105224609375," IMG-20211123-WA0010.jpg (file attached)  location: https://maps.google.com/?q=19.524696350097656,-96.9104995727539  IMG-20211123-WA0011.jpg (file attached)  location: https://maps.google.com/?q=19.524656295776367,-96.9105224609375",19,Limon,Camila Rangel
+2021-11-23 03:54:00.000000,"19.524599075317383,-96.91053009033203",19.524599075317383,-96.91053009033205," IMG-20211123-WA0013.jpg (file attached)  location: https://maps.google.com/?q=19.524599075317383,-96.91053009033203  IMG-20211123-WA0012.jpg (file attached)",20,Nispero,Camila Rangel
+2021-11-24 03:56:00.000000,"19.4266792,-99.1591695",19.4266792,-99.1591695," Limon  IMG-20211124-WA0015.jpg (file attached)  location: https://maps.google.com/?q=19.4266792,-99.1591695",21, Limon    ,Nachito
+2021-11-27 01:39:00.000000,"20.66786766052246,-103.36592102050781",20.66786766052246,-103.3659210205078," IMG-20211127-WA0008.jpg (file attached)  Naranja agria  location: https://maps.google.com/?q=20.66786766052246,-103.36592102050781  En Guadalajara",22,Naranja agria,Martina
+2021-11-27 01:49:00.000000,"20.67302131652832,-103.3660888671875",20.67302131652832,-103.3660888671875," IMG-20211127-WA0010.jpg (file attached)  Guayaba  location: https://maps.google.com/?q=20.67302131652832,-103.3660888671875",23,Guayaba,Martina
+2021-11-27 01:54:00.000000,"20.67383575439453,-103.36693572998047",20.67383575439453,-103.36693572998048," IMG-20211127-WA0011.jpg (file attached)  location: https://maps.google.com/?q=20.67383575439453,-103.36693572998047  IMG-20211127-WA0012.jpg (file attached)  location: https://maps.google.com/?q=20.67382049560547,-103.36727142333984",24,Papaya,Martina
+2021-11-27 01:54:00.000000,"20.67383575439453,-103.36693572998047",20.67383575439453,-103.36693572998048," IMG-20211127-WA0011.jpg (file attached)  location: https://maps.google.com/?q=20.67383575439453,-103.36693572998047  IMG-20211127-WA0012.jpg (file attached)  location: https://maps.google.com/?q=20.67382049560547,-103.36727142333984",25,Naranja agria,Martina
+2021-11-27 02:01:00.000000,"20.674083709716797,-103.37063598632812",20.674083709716797,-103.37063598632812," IMG-20211127-WA0013.jpg (file attached)  location: https://maps.google.com/?q=20.674083709716797,-103.37063598632812",26,Nopal,Martina
+2021-11-27 04:43:00.000000,"20.670442581176758,-103.36490631103516",20.67044258117676,-103.36490631103516," IMG-20211127-WA0019.jpg (file attached)  location: https://maps.google.com/?q=20.670442581176758,-103.36490631103516",27,Limon,Martina
+2021-11-28 09:27:00.000000,"19.4171085357666,-99.15811920166016",19.4171085357666,-99.15811920166016," IMG-20211128-WA0013.jpg (file attached)  Guayaba  location: https://maps.google.com/?q=19.4171085357666,-99.15811920166016",28,Guayaba,Ixchel
+2021-12-01 03:18:00.000000,"19.388259887695312,-99.1482162475586",19.388259887695312,-99.1482162475586," IMG-20211201-WA0007.jpg (file attached)  location: https://maps.google.com/?q=19.388259887695312,-99.1482162475586  Nísperos",29,Nispero,Ixchel
+2024-11-14 19:45:34.985300,,19.49967578232703,-96.94498537030411,,30,Cafe y nispero,Jero Aranda
+2024-11-17 01:37:45.935240,,20.180516,-96.7263205,uva de mar en la playa,32,uva de mar,Jero Aranda
+2024-11-19 23:20:37.090109,,25.65410508232455,-100.28971391149726,Se emplean las semillas en la cocina ,33,Ébano ,Amado
+2024-11-19 23:20:49.216058,,25.65410508232455,-100.28971391149726,Se emplean las semillas en la cocina ,34,Higo,Amado
+2024-11-19 23:25:34.109987,En la esquina del cipréses y  cláveles ,25.654918519526095,-100.28987695013765,"Buen tamaño, maduras en octubre y noviembre. Muy Amargas, buenas para usar la cáscara o en mermeladas.",35,Naranja,Amado
+2024-11-19 23:25:37.026617,En la esquina del cipréses y  cláveles ,25.654918519526095,-100.28987695013765,"Buen tamaño, maduras en octubre y noviembre. Muy Amargas, buenas para usar la cáscara o en mermeladas.",36,Naranja,Amado
+2024-11-19 23:54:48.707480,,25.65669774123057,-100.29133401738318,,37,Toronja,Jero Aranda
+2024-11-20 16:54:52.615997,,25.655720684944473,-100.29078825620293,Algo amarga pero de buen sabor. Tiene epazote creciendo alrededor ,38,Mandarina,Amado
+2024-11-20 17:13:35.692306,,25.657854438535228,-100.29088656032424,"Las hojas de la tronadora se usan de diversas formas, en es entre ellas, como té, para tratar infecciones de la piel como ungüento , o como antídoto contra venenos de alacranes y víboras",39,Tronadora ,Amado
+2024-11-21 01:36:00.870503,,19.4998066,-96.9448524,test,40,Jinicuil,Jero Aranda
+2024-11-21 01:37:22.101218,,19.4998066,-96.9448524,test,41,Izote,Jero Aranda
+2024-11-21 15:09:25.992937,,19.4998023,-96.9448414,,42,Mandarina,Jero Aranda
+2024-11-21 16:59:06.916227,,25.655117476632277,-100.29056545557741,La mayoría estarán maduran en diciembre. ,43,Naranja agria,Amado
+2024-11-21 17:00:44.180442,,25.655181491288605,-100.29074871246335,"Hermosa tonalidad. Perfecta para infusiones y en ensaladas. Expectorante, ayuda en problemas en vías respiratorias. ",44,Bugambilia,Amado
+2024-11-21 17:06:13.711579,,25.654913963203064,-100.290211795835,"""Vaina
+Cuando está tierna, se puede cocer en agua y comer como verdura. 
+
+Semillas
+Se pueden tostar y usar como sustituto del café o para hacerlo rendir. También se pueden cocinar o tostar y añadir a los platos. 
+
+Harina
+Se puede usar como aditivo alimentario o en productos de panadería y pastelería""",45,Ébano ,Amado
+2024-11-21 17:10:07.109154,,25.654343382715894,-100.28980763090718,"La corteza, resina y hojas del ahuehuete se usan en la medicina alternativa mexicana para tratar enfermedades. Por ejemplo, la corteza quemada se usa como astringente y cicatrizante para sanar quemaduras y úlceras. La resina se usa para curar heridas, úlceras, enfermedades cutáneas, dolor de muelas, gota, dolores de cabeza y dolor de tipo reumático. Las hojas pueden curar la sarna y la hinchazón de las piernas, mitigar las inflamaciones, prevenir los dolores de muelas y dientes, y ayudar a las personas con problemas hepáticos",46,Ahuehuete/ Sabino,Amado
+2024-11-21 17:14:43.919675,,25.654343382715894,-100.28980763090718,"Es Amarga, pero de amplia cáscara y posiblemente sería buena mermelada. 
+
+Para su cáscara:
+Repelente de insectos: Al igual que las cáscaras de otros cítricos, la cáscara de toronja contiene limoneno, un repelente natural de insectos. Los aceites esenciales de las cáscaras de cítricos también tienen un efecto insecticida efectivo contra mosquitos. 
+Carne: La médula de la toronja, que es la parte blanca y esponjosa, se puede usar para hacer carne con una textura similar al pollo frito. 
+Té: Se puede preparar un té con la cáscara de toronja",47,Toronja,Amado
+2024-11-21 17:22:00.990247,,25.653838002060628,-100.28926771595943,"Tiene diversos usos en  la medicina tradicional: Se utiliza para tratar afecciones bronquiales, tos, inflamaciones, cólicos hepáticos, disentería, insuficiencia urinaria, sarna, caries, entre otras. Se puede consumir en té, decocción o extracto alcohólico.
+
+Como alimento se emplean las Semillas
+Se pueden comer crudas, cocidas o asadas, y tienen un sabor similar al maní. Molidas, se pueden usar para preparar una bebida refrescante.  de ellas se extrae un aceite semejantes al del olivo ",48,Anacahuita ,Amado
+2024-11-21 22:59:05.026286,,25.65887821142903,-100.29212429708792,"Los brotes del palo borracho (Ceiba speciosa) son comestibles y se pueden utilizar en ensaladas, canapés, picadas, entradas, sobre pizzas, o como relleno.",49,Palo borracho ,Amado
+2024-11-22 18:43:06.767496,,25.65505101686413,-100.2896305426971,,50,Higo,Amado
+2024-11-22 23:14:27.570576,,25.659016170726286,-100.29276303812381,,51,Bugambilia,Amado
+2024-11-23 22:13:02.317554,,25.657905995987978,-100.29494349494139,,52,Naranja agria,Amado
+2024-11-23 22:15:53.202667,,25.658201418806247,-100.29525582142303,,53,Bugambilia,Amado
+2024-11-23 22:23:18.079499,,25.65884514972599,-100.29489341196553,,54,Anacahuita ,Amado
+2024-11-23 22:24:35.218949,,25.65870224141907,-100.29490046268342,Las flores se pueden comer frescas. Tiene un sabor intenso como su aroma.,55,Gardenia ,Amado
+2024-11-23 22:33:32.904257,,25.658966475655927,-100.29477521315954,,56,Ahuehuete/ Sabino,Amado
+2024-11-23 22:35:04.320215,,25.658966475655927,-100.29477521315954,,57,Ahuehuete/ Sabino,Amado
+2024-11-23 22:36:48.073840,,25.65962302921429,-100.29389321174065,,58,Bugambilia,Amado
+2024-11-23 22:43:16.250196,,25.659889989828404,-100.29421350066856,"Usos medicinales
+La yuca rostrata se usa para tratar problemas de salud como osteoartritis, hipertensión, dolor en las articulaciones, migraña, y diabetes. Sus hojas tienen propiedades diuréticas, antiinflamatorias, antibacterianas, antifúngicas, antivirales, y citotóxicas",59,Soyate/palmita,Amado
+2024-11-23 22:47:37.203947,,25.660007889513633,-100.29480487321699,,60,Soyate/palmita,Amado
+2024-11-23 22:56:52.904623,,25.6599588246116,-100.2946093580091,,61,Anacahuita ,Amado
+2024-11-23 23:01:27.159272,,25.659940572098538,-100.29479136835052,"aloe maculata es una planta con propiedades medicinales que se utiliza tradicionalmente para tratar diversas afecciones, como:
+Inflamaciones
+Enfermedades del sistema respiratorio, musculoesquelético, circulatorio y endocrino
+Intoxicaciones
+Afecciones de la piel 
+El aloe maculata tiene propiedades antibacterianas, vitaminas, aminoácidos y minerales. Es más fácil de producir y comercializar que el aloe vera. 
+En medicina doméstica, el aloe maculata se usa en reemplazo del aloe vera",62,Aloe maculata,Amado
+2024-11-23 23:03:00.780408,,25.659964913757253,-100.29488218811449,,63,Naranja agria,Amado
+2024-11-23 23:14:50.252050,,25.659852840349725,-100.29457585963807,"La tronadora (Tecoma stans) es una planta medicinal que se puede consumir como té: 
+La decocción de la raíz se toma como té diurético para promover la micción. 
+Las hojas contienen alcaloides que disminuyen los niveles de glucosa en la sangre, por lo que se usa para tratar la diabetes tipo 2",64,Tronadora ,Amado
+2024-11-23 23:19:45.204046,,25.65984420742893,-100.29466897592667,"En la cocina
+La granada es una fruta versátil que se puede usar en platos dulces y salados. Sus semillas se pueden usar en ensaladas, macedonias, con yogur, en bizcochos y pasteles. También se puede preparar zumo de granada. 
+En la medicina tradicional
+En México, la granada se usa para tratar diversas enfermedades. La cáscara cocida se usa para la fiebre, las hojas y el tallo como antidiarreicos, y las flores en infusión para problemas de garganta. 
+En la cosmética
+La granada se puede usar como humectante, exfoliante, tónico refrescante, y protector solar natural. 
+En la industria
+El jugo de granada se usa como tinte natural en fábricas de productos no sintéticos.",65,Granada,Amado
+2024-11-23 23:21:01.738050,,25.659872511931376,-100.29500873648307,,66,Toronja,Amado
+2024-11-25 19:35:02.373195,,25.653131062646413,-100.3002493551669,,67,Naranja agria,Amado
+2024-11-25 19:41:32.991540,,25.65346910234172,-100.29991422267842,"Aceite de oliva
+Se utiliza en la gastronomía mediterránea para guisos, sofritos, pucheros, etc. También se puede usar como ungüento para tratar quemaduras, dolores reumáticos y lesiones articulares. 
+Hojas de olivo
+Se pueden usar para:
+Prevenir y combatir la hipertensión arterial 
+Estimular la orina 
+Combatir la fiebre 
+Eliminar impurezas del organismo 
+Tratamientos de la diabetes, problemas de hígado y cálculos biliares 
+Corteza de olivo
+Se puede utilizar para:
+Lavar la zona afectada por las hemorroides 
+Bajar la fiebre ",68,Olivo,Amado
+2024-11-25 19:53:14.298622,,25.653330483879717,-100.29814252340368,"las flores de magnolia son comestibles y se pueden usar para dar sabor, aroma y color a los alimentos: 
+Se pueden comer crudas o cocidas. 
+Se pueden usar como guarnición en ensaladas, aves y pescados. 
+Se pueden conservar en azúcar, vinagre o licor. 
+Se pueden usar para preparar té. 
+Las flores de magnolia tienen un sabor a jengibre con aroma a cardamomo, clavo y, a veces, alcanfor",69,Magnolia ,Amado
+2024-11-26 21:37:56.305360,,25.652011147675008,-100.28703275680606,"Se usa para condimentar carnes, aves, pescados, salsas, sopas y guisos. Las ramas secas se utilizan en asados de carne, mientras que las ramitas frescas se pueden agregar a marinadas y adobos. También se puede usar para hacer un aliño de aceite de oliva con romero y flores de romero para ensaladas. 
+Aromaterapia y perfumería
+El aceite esencial de romero se usa en aromaterapia y perfumería. 
+Jabones, shampoos y aguas de colonia
+Se obtiene un aceite por destilación que se usa en jabones, shampoos y aguas de colonia",70,Romero,Amado
+2024-11-26 21:43:43.658091,,25.65180441792564,-100.28717898872877,"cenizo, también conocido como Chenopodium album o quinhuilla, tiene diversos usos, entre ellos:
+Alimento: Sus hojas y tallos se pueden consumir crudos o hervidos, y sus semillas se pueden usar para hacer pan. También se puede usar como base para ensaladas. 
+Medicinal: Se puede usar como infusión para tratar cólicos intestinales, dolor de estómago, tos, fiebre, hepatitis, problemas urinarios, entre otros. ",71,Cenizo,Amado
+2024-11-26 22:23:32.069826,,25.65535798268162,-100.29073156301318,"Además de la fruta, se puede comer las hojas y las flores. Es útil en regiones donde la papaya no madurará debido a la falta de condiciones climáticas adeudadas para ello",72,Papaya,Amado
+2024-11-28 17:03:08.492673,,19.437244031566873,-99.15128208296285,"Se comen las flores, las hojas y la raiz",73,Pata de vaca,Amado
+2024-12-05 18:10:23.948054,,25.653532171808855,-100.28965362559484,"Fruto dulce entre fresa, lichis y jazmín ",74,Ciruelo de natal,Amado
+2025-02-26 02:27:23.427602,,19.390115884898524,-99.16807173979312,,76,Cafe,Amado
+2025-02-26 20:22:28.110696,,19.428480144926688,-99.14274813579331,,77,Zapote blanco,Amado
