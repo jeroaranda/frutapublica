@@ -1,5 +1,7 @@
+
 from sqlalchemy import create_engine, func
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.exc import OperationalError, SQLAlchemyError
 from models.models import Flora, Observation, User, Recipe, RecipeIngredient
 import pandas as pd
 from datetime import datetime
@@ -29,7 +31,7 @@ class _FallbackQuery:
 
 
 class _FallbackSession:
-    """A very small session-like object used when DB is not configured.
+    """A very small session-like object used when DB is not configured or unreachable.
 
     It only supports the minimal calls used by `Home.py`: `query(Flora).all()`
     and `query(User).all()`. It also exposes `close()` for compatibility.
@@ -51,25 +53,35 @@ class _FallbackSession:
         return None
 
 
-def _db_url_present():
-    return bool(os.getenv('DATABASE_URL'))
+def _get_engine():
+    """Create an engine and verify connectivity. Return engine or None on failure."""
+    database_url = os.getenv('DATABASE_URL')
+    if not database_url:
+        return None
+    try:
+        engine = create_engine(database_url)
+        # Try a short-lived connection to confirm DB is reachable
+        conn = engine.connect()
+        conn.close()
+        return engine
+    except Exception:
+        return None
 
 
 def get_db_session():
-    """Create and return a database session or a fallback session when no DB is configured."""
-    if not _db_url_present():
-        # Return a lightweight fallback session backed by CSV
+    """Create and return a database session or a fallback session when DB is not configured/unreachable."""
+    engine = _get_engine()
+    if engine is None:
         store = FallbackStore()
         return _FallbackSession(store)
-
-    engine = create_engine(os.getenv('DATABASE_URL'))
     Session = sessionmaker(bind=engine)
     return Session()
 
 
 def get_observations_df():
-    """Get observations as a pandas DataFrame. Uses DB if configured, otherwise CSV fallback."""
-    if not _db_url_present():
+    """Get observations as a pandas DataFrame. Uses DB if reachable, otherwise CSV fallback."""
+    engine = _get_engine()
+    if engine is None:
         store = FallbackStore()
         df = pd.DataFrame(store.all())
         # Ensure columns used by the front-end exist
@@ -78,26 +90,39 @@ def get_observations_df():
                 df[c] = None
         return df
 
+    # If engine exists, attempt DB query but fall back on any SQL errors
     session = get_db_session()
-    observations = session.query(
-        Observation.id,
-        Observation.datetime,
-        Flora.name.label('flora_name'),
-        User.username,
-        Observation.lat,
-        Observation.lon,
-        Observation.address,
-        Observation.description
-    ).join(Flora).join(User).all()
+    try:
+        observations = session.query(
+            Observation.id,
+            Observation.datetime,
+            Flora.name.label('flora_name'),
+            User.username,
+            Observation.lat,
+            Observation.lon,
+            Observation.address,
+            Observation.description
+        ).join(Flora).join(User).all()
 
-    df = pd.DataFrame(observations)
-    session.close()
-    return df
-
+        df = pd.DataFrame(observations)
+        return df
+    except (OperationalError, SQLAlchemyError):
+        # Fall back to CSV if the DB operation fails at runtime
+        store = FallbackStore()
+        df = pd.DataFrame(store.all())
+        for c in ['id', 'datetime', 'flora_name', 'username', 'lat', 'lon', 'address', 'description']:
+            if c not in df.columns:
+                df[c] = None
+        return df
+    finally:
+        try:
+            session.close()
+        except Exception:
+            pass
 
 def add_observation(flora_name, username, lat, lon, address, description):
     """Add a new observation to the database or append to CSV when no DB is configured."""
-    if not _db_url_present():
+    if _get_engine() is None:
         # Append to CSV
         csv_path = Path(__file__).parent.parent / 'data' / 'flora_data.csv'
         store = FallbackStore(csv_path)
@@ -156,7 +181,7 @@ def add_observation(flora_name, username, lat, lon, address, description):
 
 def get_recipes():
     """Get all recipes with their ingredients. Uses DB or a JSON fallback file."""
-    if not _db_url_present():
+    if _get_engine() is None:
         json_path = Path(__file__).parent.parent / 'data' / 'recipes_fallback.json'
         if not json_path.exists():
             return []
@@ -180,7 +205,7 @@ def get_recipes():
 
 def add_recipe(name, prep, flora_names):
     """Add a new recipe with ingredients to DB or to a JSON fallback file."""
-    if not _db_url_present():
+    if _get_engine() is None:
         json_path = Path(__file__).parent.parent / 'data' / 'recipes_fallback.json'
         if json_path.exists():
             with open(json_path, 'r', encoding='utf-8') as fh:
